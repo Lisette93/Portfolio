@@ -492,6 +492,7 @@ function FeaturedCarousel() {
   const next = () => setCurrent((c) => (c + 1) % n);
 
   return (
+    <>
     <div className="flex items-center justify-center gap-6 px-6">
       <ArrowButton onClick={prev} dir="left" />
 
@@ -623,6 +624,29 @@ function FeaturedCarousel() {
 
       <ArrowButton onClick={next} dir="right" />
     </div>
+
+    {/* pagination dots */}
+    <div className="flex items-center justify-center gap-2.5 mt-8">
+      {featured.map((_, i) => (
+        <button
+          key={i}
+          onClick={() => setCurrent(i)}
+          aria-label={`Visa projekt ${i + 1}`}
+          className="transition-all duration-300"
+        >
+          <div
+            className="rounded-full transition-all duration-300"
+            style={{
+              width: i === current ? 24 : 8,
+              height: 8,
+              backgroundColor: i === current ? '#7d9e8a' : '#C9A87C',
+              opacity: i === current ? 1 : 0.4,
+            }}
+          />
+        </button>
+      ))}
+    </div>
+    </>
   );
 }
 
@@ -630,7 +654,7 @@ export default function Home() {
   return (
     <PageTransition>
       {/* ── HERO ── */}
-      <section className="relative min-h-screen flex flex-col items-center justify-center text-center px-6 pt-24 pb-4 overflow-hidden">
+      <section className="relative min-h-screen flex flex-col items-center justify-center text-center px-6 pt-36 pb-4 overflow-hidden">
         <AnimatedHeroBackground />
 
         <HeroBotanicalLeft />
@@ -687,6 +711,18 @@ export default function Home() {
             </Link>
           </div>
         </FadeIn>
+
+        {/* scroll indicator */}
+        <motion.div
+          className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 text-charcoal/30"
+          animate={{ y: [0, 8, 0] }}
+          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+        >
+          <span className="font-body text-xs tracking-widest uppercase">scroll</span>
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+            <path d="M3 6l5 5 5-5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
+        </motion.div>
       </section>
 
       {/* ── WHAT I DO STRIP ──
