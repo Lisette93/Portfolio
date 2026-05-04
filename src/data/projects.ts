@@ -2,6 +2,8 @@ import optichaingImg from "../assets/optichain.png";
 import kanbanImg from "../assets/kanban.png";
 import studentPortalImg from "../assets/StudentPortal.png";
 import healthAppImg from "../assets/HealthApp.png";
+import leksaksbibliotekImg from "../assets/leksaksbibliotek.png";
+import vandrandekassarImg from "../assets/vandrandekassar.png";
 
 export interface Project {
   id: string;
@@ -76,7 +78,8 @@ export const projects: Project[] = [
     rotation: "1deg",
     featured: false,
     size: "medium",
-    links: [{ label: "View prototype", url: "#" }],
+    image: leksaksbibliotekImg,
+    links: [{ label: "View prototype", url: "https://www.figma.com/proto/IjWeaK8KZZXxvIS2Qh8A82/Enh%C3%B6rningstanternas-snygg-figma?node-id=6-53&scaling=scale-down&content-scaling=fixed&t=PkdXdtJGGKdC2eiJ-1&page-id=0%3A1" }],
   },
   {
     id: "wandering-bags",
@@ -101,7 +104,8 @@ export const projects: Project[] = [
     rotation: "-0.6deg",
     featured: false,
     size: "medium",
-    links: [{ label: "View prototype", url: "#" }],
+    image: vandrandekassarImg,
+    links: [{ label: "View prototype", url: "https://www.figma.com/proto/4v4lv65dPbsVzXCG7tLwdw/SLUTPROJEKT-UX-EH-Vandrande-kasse?node-id=274-59&p=f&viewport=1283%2C92%2C0.05&t=x5QYZ6A7kJKgASg2-1&scaling=min-zoom&content-scaling=fixed&starting-point-node-id=274%3A59&show-proto-sidebar=1&page-id=270%3A114" }],
   },
   {
     id: "optichain",

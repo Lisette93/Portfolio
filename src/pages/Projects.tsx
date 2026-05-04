@@ -221,8 +221,6 @@ export default function Projects() {
         </FadeIn>
       </section>
 
-      <WaveDivider fill="#edf2ef" />
-
       {/* ── GRID ── */}
       <section className="w-full py-24 flex justify-center">
         <div className="w-full max-w-5xl px-8 md:px-14">
