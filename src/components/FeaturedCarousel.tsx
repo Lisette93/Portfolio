@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { projects } from "../data/projects";
 
@@ -27,16 +27,31 @@ function ArrowButton({ onClick, dir }: { onClick: () => void; dir: "left" | "rig
 export default function FeaturedCarousel() {
   const [current, setCurrent] = useState(0);
   const n = featured.length;
+  const touchStartX = useRef(0);
 
   const prev = () => setCurrent((c) => (c - 1 + n) % n);
   const next = () => setCurrent((c) => (c + 1) % n);
 
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+  };
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    const diff = touchStartX.current - e.changedTouches[0].clientX;
+    if (diff > 50) next();
+    else if (diff < -50) prev();
+  };
+
   return (
     <>
       <div className="flex items-center justify-center gap-10 px-6">
-        <ArrowButton onClick={prev} dir="left" />
+        <div className="hidden md:block"><ArrowButton onClick={prev} dir="left" /></div>
 
-        <div className="relative flex-1 max-w-4xl" style={{ height: 520 }}>
+        <div
+          className="relative flex-1 max-w-4xl"
+          style={{ height: 520 }}
+          onTouchStart={handleTouchStart}
+          onTouchEnd={handleTouchEnd}
+        >
           {featured.map((project, idx) => {
             let offset = (idx - current + n) % n;
             if (offset > n / 2) offset -= n;
@@ -122,7 +137,7 @@ export default function FeaturedCarousel() {
           })}
         </div>
 
-        <ArrowButton onClick={next} dir="right" />
+        <div className="hidden md:block"><ArrowButton onClick={next} dir="right" /></div>
       </div>
 
       <div className="flex items-center justify-center gap-2.5 mt-8">

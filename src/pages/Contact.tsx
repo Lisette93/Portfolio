@@ -78,8 +78,6 @@ export default function Contact() {
         </FadeIn>
       </section>
 
-      <WaveDivider fill="#edf2ef" />
-
       {/* ── FORM + INFO ── */}
       <section className="w-full py-20 flex justify-center">
         <div className="w-full max-w-5xl px-8 md:px-14 grid grid-cols-1 lg:grid-cols-5 gap-12 items-start">

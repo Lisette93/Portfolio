@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
+import ScrollToTop from "./components/ScrollToTop";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Projects from "./pages/Projects";
@@ -24,7 +25,8 @@ function AnimatedRoutes() {
 export default function App() {
   return (
     <BrowserRouter>
-<Navbar />
+      <ScrollToTop />
+      <Navbar />
       <main className="flex-1 w-full">
         <AnimatedRoutes />
       </main>
