@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(dir \"pastel-shimmering-acrylic-brush-stroke.jpg\")",
+      "Bash(findstr jpg *)",
+      "Bash(powershell -command \"\\(Get-Item 'c:\\\\Users\\\\Liset\\\\portfolio\\\\src\\\\assets\\\\pastel-shimmering-acrylic-brush-stroke.jpg'\\).Length / 1KB\")"
+    ]
+  }
+}

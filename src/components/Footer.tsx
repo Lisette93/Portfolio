@@ -72,7 +72,7 @@ export default function Footer() {
 
         {/* built-by + stack */}
         <div className="flex flex-col items-center gap-1.5">
-          <p className="font-accent text-sand text-xl">designed & built by Lisette ✦</p>
+          <p className="font-accent text-sand-dark text-xl">designed & built by Lisette ✦</p>
           <p className="font-body text-xs text-charcoal-light tracking-wide">
             React · TypeScript · Tailwind · Framer Motion
           </p>

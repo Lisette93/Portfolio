@@ -3,6 +3,7 @@ import WaveDivider from "../components/WaveDivider";
 import PageTransition from "../components/PageTransition";
 import FadeIn from "../components/FadeIn";
 import liseImg from "../assets/Lisette1.png";
+import cvUrl from "../assets/CV-Lisette.pdf";
 
 const uxSkills = [
   "User-centered design",
@@ -84,14 +85,14 @@ export default function About() {
       >
         <FadeIn>
           <span className="font-accent text-sand-dark text-xl">
-            ...Before I wrote a line of code, I spent a decade reading people.
+            ...and once ran her own business for a decade
           </span>
         </FadeIn>
         <FadeIn delay={0.1}>
           <h1 className="font-display text-6xl md:text-8xl text-charcoal mt-4 leading-tight max-w-3xl mx-auto">
-            Hi, I'm Lisette.
+            The frontend developer
             <br />
-            <em className="text-sage-dark text-4xl md:text-6xl">Frontend developer. UX thinker.</em>
+            <em className="text-sage-dark text-4xl md:text-6xl">who thinks in design.</em>
           </h1>
         </FadeIn>
       </section>
@@ -179,6 +180,18 @@ export default function About() {
                   </span>
                 ))}
               </div>
+            </FadeIn>
+            <FadeIn delay={0.5}>
+              <a
+                href={cvUrl}
+                download="CV-Lisette.pdf"
+                className="inline-flex items-center gap-2.5 px-6 py-3 rounded-full border border-charcoal/20 text-charcoal font-body text-sm hover:border-sage hover:text-sage transition-colors mt-2"
+              >
+                <svg width="15" height="15" viewBox="0 0 15 15" fill="none">
+                  <path d="M7.5 1v9m0 0L4.5 7m3 3L10.5 7M2 13h11" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+                Download CV
+              </a>
             </FadeIn>
           </div>
         </div>

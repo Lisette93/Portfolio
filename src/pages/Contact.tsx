@@ -220,7 +220,7 @@ export default function Contact() {
         <section className="w-full bg-[#f0ebe3] py-10 px-6 text-center flex justify-center">
           <FadeIn>
             <p className="font-accent text-sand-dark text-2xl">
-              Currently open to internships &amp; junior roles ✦
+              Currently open to UX &amp; frontend opportunities ✦
             </p>
           </FadeIn>
         </section>

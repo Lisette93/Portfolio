@@ -4,7 +4,7 @@ import PageTransition from "../components/PageTransition";
 import FadeIn from "../components/FadeIn";
 import { HeroBotanicalLeft, HeroBotanicalRight, FloatingSparkles } from "../components/HeroDecorations";
 import FeaturedCarousel from "../components/FeaturedCarousel";
-import pastelImg from "../assets/pastel-shimmering-acrylic-brush-stroke.jpg";
+import pastelImg from "../assets/pastel-shimmering-acrylic-brush-stroke.webp";
 
 function AnimatedHeroBackground() {
   return (
@@ -61,7 +61,7 @@ export default function Home() {
         <FloatingSparkles />
 
         <FadeIn delay={0}>
-          <span className="font-accent text-sand-dark text-xl">welcome to my portfolio ✦</span>
+          <span className="font-accent text-sand-dark text-xl">frontend developer · ux designer</span>
         </FadeIn>
 
         <FadeIn delay={0.1}>
@@ -85,7 +85,7 @@ export default function Home() {
 
         <FadeIn delay={0.2}>
           <p className="font-body text-charcoal-light text-lg md:text-xl mt-6 max-w-xl leading-relaxed">
-            <p>Hi, I'm Lisette!</p>A frontend developer student who loves the
+            <span className="block mb-1">Hi, I'm Lisette!</span>A frontend developer student who loves the
             combination of design and code, and genuinely cares about how things
             feel to use, not just how they look.
           </p>
@@ -95,7 +95,7 @@ export default function Home() {
           <div className="flex flex-wrap items-center justify-center gap-4 mt-10">
             <Link
               to="/projects"
-              className="px-8 py-4 bg-rose text-charcoal rounded-full font-body font-medium text-base hover:bg-sand transition-colors duration-300"
+              className="px-8 py-4 bg-charcoal text-cream rounded-full font-body font-medium text-base hover:bg-sage transition-colors duration-300"
             >
               See my work
             </Link>
