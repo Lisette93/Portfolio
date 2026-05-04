@@ -2,21 +2,8 @@ import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import PageTransition from '../components/PageTransition'
 import WaveDivider from '../components/WaveDivider'
+import FadeIn from '../components/FadeIn'
 import { projects, type Project } from '../data/projects'
-
-function FadeIn({ children, delay = 0, className = '' }: { children: React.ReactNode; delay?: number; className?: string }) {
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 24 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: '-40px' }}
-      transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay }}
-      className={className}
-    >
-      {children}
-    </motion.div>
-  )
-}
 
 /* decorative soft SVG blob used as card background accent */
 function BlobAccent({ color, className = '' }: { color: string; className?: string }) {
@@ -46,7 +33,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
         transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
         onHoverStart={() => setHovered(true)}
         onHoverEnd={() => setHovered(false)}
-        className="relative rounded-4xl overflow-hidden shadow-[0_6px_30px_rgba(44,44,42,0.09)] hover:shadow-[0_16px_50px_rgba(44,44,42,0.16)] transition-shadow cursor-none group"
+        className="relative rounded-4xl overflow-hidden shadow-[0_6px_30px_rgba(44,44,42,0.09)] hover:shadow-[0_16px_50px_rgba(44,44,42,0.16)] transition-shadow group"
       >
         {/* blob accent decoration */}
         <BlobAccent color={project.color} className="w-48 -top-8 -right-8" />
@@ -159,8 +146,25 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
               className="absolute inset-0 z-20 flex items-end p-7 md:p-9 rounded-4xl"
               style={{ background: `linear-gradient(160deg, ${project.color}cc, ${project.color}ee)` }}
             >
-              <div>
-                <p className="font-body text-cream/90 text-sm leading-relaxed">{project.longDesc}</p>
+              <div className="w-full">
+                <p className="font-body text-cream/90 text-sm leading-relaxed mb-5">{project.longDesc}</p>
+                <div className="flex flex-wrap gap-3">
+                  {project.links.map(link => (
+                    <a
+                      key={link.label}
+                      href={link.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={e => link.url === '#' && e.preventDefault()}
+                      className="font-body text-xs px-5 py-2.5 rounded-full inline-flex items-center gap-2 bg-cream/20 border border-cream/40 text-cream hover:bg-cream/35 transition-colors"
+                    >
+                      {link.label}
+                      <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
+                        <path d="M2 8L8 2M8 2H4M8 2V6" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
+                      </svg>
+                    </a>
+                  ))}
+                </div>
               </div>
             </motion.div>
           )}
