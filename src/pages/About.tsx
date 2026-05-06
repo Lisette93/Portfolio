@@ -161,9 +161,8 @@ export default function About() {
             </FadeIn>
             <FadeIn delay={0.3}>
               <p className="font-body text-charcoal-light leading-relaxed">
-                I'm actively exploring AI tools like Claude Code and v0 — not to
-                skip the learning, but to sharpen how I approach problems and
-                raise the quality of my work.
+                I'm actively exploring AI tools like Claude Code and v0 — to get
+                ideas, learn, and sharpen the quality of my work.
               </p>
             </FadeIn>
             <FadeIn delay={0.4}>

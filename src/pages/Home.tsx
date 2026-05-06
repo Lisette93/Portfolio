@@ -2,28 +2,26 @@ import { Link } from "react-router-dom";
 import WaveDivider from "../components/WaveDivider";
 import PageTransition from "../components/PageTransition";
 import FadeIn from "../components/FadeIn";
-import { HeroBotanicalLeft, HeroBotanicalRight, FloatingSparkles } from "../components/HeroDecorations";
+import {
+  HeroBotanicalLeft,
+  HeroBotanicalRight,
+  FloatingSparkles,
+} from "../components/HeroDecorations";
 import FeaturedCarousel from "../components/FeaturedCarousel";
-import pastelImg from "../assets/pastel-shimmering-acrylic-brush-stroke.webp";
-
-function AnimatedHeroBackground() {
-  return (
-    <div
-      className="absolute inset-0 -z-10"
-      style={{
-        background:
-          "radial-gradient(ellipse 70% 35% at 50% 38%, #a8c4b0 0%, #d8eae4 35%, #edf5f2 62%, #FAF7F2 82%)",
-      }}
-    />
-  );
-}
+import { motion } from "framer-motion";
+import healthAppImg from "../assets/HealthApp.png";
 
 const whatIDo = [
   {
     icon: (
       <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
         <circle cx="16" cy="12" r="6" stroke="#7A9E87" strokeWidth="1.5" />
-        <path d="M6 26c0-5.523 4.477-10 10-10s10 4.477 10 10" stroke="#7A9E87" strokeWidth="1.5" strokeLinecap="round" />
+        <path
+          d="M6 26c0-5.523 4.477-10 10-10s10 4.477 10 10"
+          stroke="#7A9E87"
+          strokeWidth="1.5"
+          strokeLinecap="round"
+        />
       </svg>
     ),
     title: "UX Design",
@@ -32,8 +30,22 @@ const whatIDo = [
   {
     icon: (
       <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-        <rect x="4" y="6" width="24" height="18" rx="3" stroke="#7A9E87" strokeWidth="1.5" />
-        <path d="M12 16l-4 3 4 3M20 16l4 3-4 3M17 13l-2 8" stroke="#7A9E87" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+        <rect
+          x="4"
+          y="6"
+          width="24"
+          height="18"
+          rx="3"
+          stroke="#7A9E87"
+          strokeWidth="1.5"
+        />
+        <path
+          d="M12 16l-4 3 4 3M20 16l4 3-4 3M17 13l-2 8"
+          stroke="#7A9E87"
+          strokeWidth="1.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
       </svg>
     ),
     title: "Frontend Development",
@@ -42,7 +54,12 @@ const whatIDo = [
   {
     icon: (
       <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-        <path d="M16 4l2.5 7.5H26l-6.5 4.7 2.5 7.5L16 19l-6 4.7 2.5-7.5L6 11.5h7.5L16 4z" stroke="#7A9E87" strokeWidth="1.5" strokeLinejoin="round" />
+        <path
+          d="M16 4l2.5 7.5H26l-6.5 4.7 2.5 7.5L16 19l-6 4.7 2.5-7.5L6 11.5h7.5L16 4z"
+          stroke="#7A9E87"
+          strokeWidth="1.5"
+          strokeLinejoin="round"
+        />
       </svg>
     ),
     title: "AI-Assisted Workflows",
@@ -54,101 +71,133 @@ export default function Home() {
   return (
     <PageTransition>
       {/* ── HERO ── */}
-      <section className="relative min-h-screen flex flex-col items-center justify-center text-center px-6 pt-36 pb-4 overflow-hidden">
-        <AnimatedHeroBackground />
+      <section
+        className="relative min-h-screen flex items-center px-6 pt-28 pb-12 overflow-hidden"
+        style={{
+          background:
+            "radial-gradient(ellipse at 70% 30%, #f5e6d8 0%, #FAF7F2 55%)",
+        }}
+      >
         <HeroBotanicalLeft />
         <HeroBotanicalRight />
         <FloatingSparkles />
 
-        <FadeIn delay={0}>
-          <span className="font-accent text-sand-dark text-xl">frontend developer · ux designer</span>
-        </FadeIn>
+        <div className="w-full max-w-[72rem] mx-auto grid grid-cols-1 lg:grid-cols-[3fr_2fr] gap-12 items-center">
+          {/* Left column */}
+          <div className="flex flex-col items-center lg:items-start text-center lg:text-left">
+            <FadeIn delay={0}>
+              <span className="font-accent text-sand-dark text-xl">
+                Frontend Developer · UX Designer · Product Thinker ✦
+              </span>
+            </FadeIn>
 
-        <FadeIn delay={0.1}>
-          <h1 className="font-display text-6xl md:text-8xl lg:text-9xl leading-[1.05] mt-4 max-w-5xl">
-            <span
-              style={{
-                backgroundImage: `url(${pastelImg})`,
-                backgroundClip: "text",
-                WebkitBackgroundClip: "text",
-                color: "transparent",
-                backgroundSize: "cover",
-                backgroundPosition: "center top",
-                display: "block",
-              }}
-            >
-              Design that thinks.
-            </span>
-            <em className="text-sage-dark">Code that feels.</em>
-          </h1>
-        </FadeIn>
+            <FadeIn delay={0.1}>
+              <h1 className="font-display text-5xl md:text-6xl lg:text-7xl leading-[1.05] mt-4 max-w-3xl">
+                <span className="block text-charcoal">Design that thinks.</span>
+                <em style={{ color: "#C4956A" }}>Code that feels.</em>
+              </h1>
+            </FadeIn>
 
-        <FadeIn delay={0.2}>
-          <p className="font-body text-charcoal-light text-lg md:text-xl mt-6 max-w-xl leading-relaxed">
-            <span className="block mb-1">Hi, I'm Lisette!</span>A frontend developer student who loves the
-            combination of design and code, and genuinely cares about how things
-            feel to use, not just how they look.
-          </p>
-        </FadeIn>
+            <FadeIn delay={0.2}>
+              <p className="font-body text-charcoal-light text-lg md:text-xl mt-6 max-w-xl leading-relaxed">
+                <span className="block mb-1">Hi, I'm Lisette.</span>I think
+                about the whole picture, the user, the experience, and the code
+                that brings it all to life.
+              </p>
+            </FadeIn>
 
-        <FadeIn delay={0.3}>
-          <div className="flex flex-wrap items-center justify-center gap-4 mt-10">
-            <Link
-              to="/projects"
-              className="px-8 py-4 bg-charcoal text-cream rounded-full font-body font-medium text-base hover:bg-sage transition-colors duration-300"
-            >
-              See my work
-            </Link>
-            <Link
-              to="/about"
-              className="px-8 py-4 border border-charcoal/30 text-charcoal rounded-full font-body font-medium text-base hover:border-sand hover:text-sand transition-colors duration-300"
-            >
-              About me
-            </Link>
+            <FadeIn delay={0.3}>
+              <div className="flex flex-wrap items-center justify-center lg:justify-start gap-4 mt-10">
+                <Link
+                  to="/projects"
+                  className="px-8 py-4 text-cream rounded-full font-body font-medium text-base transition-opacity duration-300 hover:opacity-80"
+                  style={{ backgroundColor: "#C4956A" }}
+                >
+                  See my work
+                </Link>
+                <Link
+                  to="/about"
+                  className="px-8 py-4 border text-charcoal rounded-full font-body font-medium text-base transition-colors duration-300 hover:text-[#C4956A]"
+                  style={{ borderColor: "#C4956A66" }}
+                >
+                  About me
+                </Link>
+              </div>
+            </FadeIn>
           </div>
-        </FadeIn>
+
+          {/* Right column — floating image */}
+          <FadeIn delay={0.2} className="flex justify-center lg:justify-end">
+            <motion.img
+              src={healthAppImg}
+              alt="Health app project preview"
+              animate={{ y: [0, -14, 0] }}
+              transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+              className="w-64 md:w-72 lg:w-80 xl:w-96 drop-shadow-2xl rounded-3xl"
+            />
+          </FadeIn>
+        </div>
       </section>
 
       {/* ── WHAT I DO ── */}
-      <div
-        className="relative w-full"
-        style={{ backgroundImage: `url(${pastelImg})`, backgroundSize: "cover", backgroundPosition: "center" }}
-      >
-        <div className="absolute inset-0 bg-cream/30 pointer-events-none z-1" />
-        <WaveDivider fill="#FAF7F2" flip wavy height="h-44 md:h-60" className="relative z-10" />
+      <div className="relative w-full" style={{ background: "#f0ebe3" }}>
+        <WaveDivider
+          fill="#FAF7F2"
+          flip
+          wavy
+          height="h-44 md:h-60"
+          className="relative z-10"
+        />
         <section className="relative z-10 w-full -mt-20 md:-mt-28 pt-4 pb-28 flex justify-center">
           <div className="w-full max-w-[72rem] px-8 md:px-14">
             <FadeIn>
               <div className="text-center mb-12">
-                <span className="relative inline-block px-8 py-3">
-                  <span className="relative font-accent text-sand-dark text-xl">what I do ✦</span>
+                <span className="font-accent text-sand-dark text-xl">
+                  what I do ✦
                 </span>
               </div>
             </FadeIn>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-stretch">
-              {whatIDo.map((item, i) => (
-                <FadeIn key={item.title} delay={i * 0.1} className="flex">
-                  <div className="flex flex-col items-center text-center gap-5 p-10 pt-14 rounded-3xl bg-cream/80 backdrop-blur-sm shadow-sm hover:shadow-md transition-shadow w-full min-h-75">
-                    <div className="w-14 h-14 rounded-2xl bg-cream flex items-center justify-center shadow-sm">
-                      {item.icon}
+              {whatIDo.map((item, i) => {
+                const borderColors = ["#7A9E87", "#C9A87C", "#D4897A"];
+                return (
+                  <FadeIn key={item.title} delay={i * 0.1} className="flex">
+                    <div
+                      className="flex flex-col items-center text-center gap-5 p-10 pt-12 rounded-3xl bg-cream shadow-[0_4px_24px_rgba(44,44,42,0.10)] hover:shadow-[0_8px_32px_rgba(44,44,42,0.15)] transition-shadow w-full min-h-75 overflow-hidden relative"
+                      style={{ borderTop: `4px solid ${borderColors[i]}` }}
+                    >
+                      <div className="w-14 h-14 rounded-2xl bg-cream flex items-center justify-center shadow-sm">
+                        {item.icon}
+                      </div>
+                      <h3 className="font-display text-2xl text-charcoal">
+                        {item.title}
+                      </h3>
+                      <p className="font-body text-sm text-charcoal-light leading-relaxed">
+                        {item.desc}
+                      </p>
                     </div>
-                    <h3 className="font-display text-2xl text-charcoal">{item.title}</h3>
-                    <p className="font-body text-sm text-charcoal-light leading-relaxed">{item.desc}</p>
-                  </div>
-                </FadeIn>
-              ))}
+                  </FadeIn>
+                );
+              })}
             </div>
           </div>
         </section>
       </div>
 
       {/* ── FEATURED PROJECTS ── */}
-      <section className="w-full pt-16 pb-40 overflow-hidden" style={{ background: "#FAF7F2" }}>
+      <section
+        className="w-full pt-16 pb-40 overflow-hidden"
+        style={{ background: "#FAF7F2" }}
+      >
         <div className="w-full max-w-[72rem] mx-auto px-8 md:px-14">
           <FadeIn>
             <div className="text-center mb-20">
-              <span className="font-accent text-sand-dark text-lg">things I've made</span>
-              <h2 className="font-display text-5xl md:text-6xl text-charcoal mt-2">Featured work</h2>
+              <span className="font-accent text-sand-dark text-lg">
+                things I've made
+              </span>
+              <h2 className="font-display text-5xl md:text-6xl text-charcoal mt-2">
+                Featured work
+              </h2>
             </div>
           </FadeIn>
         </div>
@@ -162,7 +211,9 @@ export default function Home() {
               className="font-body text-sm text-sage hover:text-charcoal transition-colors inline-flex items-center gap-2 group"
             >
               View all projects
-              <span className="group-hover:translate-x-1 transition-transform">→</span>
+              <span className="group-hover:translate-x-1 transition-transform">
+                →
+              </span>
             </Link>
           </div>
         </FadeIn>
