@@ -172,7 +172,7 @@ export default function Home() {
 
       {/* ── FEATURED PROJECTS ── */}
       <section
-        className="w-full pt-16 pb-40 overflow-hidden"
+        className="w-full pt-16 pb-10 overflow-hidden"
         style={{ background: "#FAF7F2" }}
       >
         <div className="w-full max-w-[72rem] mx-auto px-8 md:px-14">
@@ -191,7 +191,7 @@ export default function Home() {
         <FeaturedCarousel />
 
         <FadeIn>
-          <div className="text-center mt-20">
+          <div className="text-center mt-6">
             <Link
               to="/projects"
               className="font-body text-sm text-sage hover:text-charcoal transition-colors inline-flex items-center gap-2 group"

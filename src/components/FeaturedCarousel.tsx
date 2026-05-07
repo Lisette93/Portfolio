@@ -140,7 +140,7 @@ export default function FeaturedCarousel() {
         <div className="hidden md:block"><ArrowButton onClick={next} dir="right" /></div>
       </div>
 
-      <div className="flex items-center justify-center gap-2.5 mt-8">
+      <div className="flex items-center justify-center gap-2.5 mt-5">
         {featured.map((_, i) => (
           <button key={i} onClick={() => setCurrent(i)} aria-label={`Visa projekt ${i + 1}`} className="transition-all duration-300">
             <div
