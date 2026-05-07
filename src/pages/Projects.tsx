@@ -184,7 +184,7 @@ export default function Projects() {
       {/* ── HERO ── */}
       <section
         className="w-full pt-32 pb-12 px-6 text-center flex flex-col items-center"
-        style={{ background: 'linear-gradient(160deg, #FAF7F2 0%, #edf2ef 60%, #f5ede4 100%)' }}
+        style={{ background: 'linear-gradient(160deg, #FAF7F2 0%, #f5e6de 60%, #f5ede4 100%)' }}
       >
         <FadeIn>
           <span className="font-accent text-sand-dark text-xl">things I've made ✦</span>

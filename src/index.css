@@ -4,9 +4,9 @@
 
 @theme {
   --color-cream: #faf7f2;
-  --color-sage: #7a9e87;
-  --color-sage-light: #a8c4b0;
-  --color-sage-dark: #3d6b54;
+  --color-sage: #B67963;
+  --color-sage-light: #ca9f84;
+  --color-sage-dark: #7a4d3a;
   --color-sand: #c9a87c;
   --color-sand-dark: #7a5a28;
   --color-rose: #d4897a;
@@ -41,6 +41,6 @@ body {
 }
 
 ::selection {
-  background: #7a9e87;
+  background: #B67963;
   color: #faf7f2;
 }

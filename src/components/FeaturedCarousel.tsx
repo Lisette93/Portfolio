@@ -148,7 +148,7 @@ export default function FeaturedCarousel() {
               style={{
                 width: i === current ? 24 : 8,
                 height: 8,
-                backgroundColor: i === current ? "#7d9e8a" : "#C9A87C",
+                backgroundColor: i === current ? "#B67963" : "#C9A87C",
                 opacity: i === current ? 1 : 0.4,
               }}
             />

@@ -15,10 +15,10 @@ const whatIDo = [
   {
     icon: (
       <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-        <circle cx="16" cy="12" r="6" stroke="#7A9E87" strokeWidth="1.5" />
+        <circle cx="16" cy="12" r="6" stroke="#B67963" strokeWidth="1.5" />
         <path
           d="M6 26c0-5.523 4.477-10 10-10s10 4.477 10 10"
-          stroke="#7A9E87"
+          stroke="#B67963"
           strokeWidth="1.5"
           strokeLinecap="round"
         />
@@ -30,22 +30,14 @@ const whatIDo = [
   {
     icon: (
       <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-        <rect
-          x="4"
-          y="6"
-          width="24"
-          height="18"
-          rx="3"
-          stroke="#7A9E87"
-          strokeWidth="1.5"
-        />
-        <path
-          d="M12 16l-4 3 4 3M20 16l4 3-4 3M17 13l-2 8"
-          stroke="#7A9E87"
-          strokeWidth="1.5"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
+        <rect x="3" y="5" width="26" height="22" rx="3" stroke="#B67963" strokeWidth="1.5" />
+        <path d="M3 11h26" stroke="#B67963" strokeWidth="1.5" strokeLinecap="round" />
+        <circle cx="8" cy="8" r="1" fill="#B67963" opacity="0.5" />
+        <circle cx="12" cy="8" r="1" fill="#B67963" opacity="0.5" />
+        <circle cx="16" cy="8" r="1" fill="#B67963" opacity="0.5" />
+        <path d="M10 17l-3 2 3 2" stroke="#B67963" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
+        <path d="M22 17l3 2-3 2" stroke="#B67963" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
+        <path d="M18 15l-4 8" stroke="#B67963" strokeWidth="1.3" strokeLinecap="round" />
       </svg>
     ),
     title: "Frontend Development",
@@ -56,14 +48,14 @@ const whatIDo = [
       <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
         <path
           d="M16 4l2.5 7.5H26l-6.5 4.7 2.5 7.5L16 19l-6 4.7 2.5-7.5L6 11.5h7.5L16 4z"
-          stroke="#7A9E87"
+          stroke="#B67963"
           strokeWidth="1.5"
           strokeLinejoin="round"
         />
       </svg>
     ),
     title: "AI-Assisted Workflows",
-    desc: "Using Claude Code, v0, and other AI tools to sharpen problem-solving and raise the quality bar.",
+    desc: "Using Claude Code, v0, and other AI tools to work smarter and raise the quality bar.",
   },
 ];
 
@@ -87,22 +79,21 @@ export default function Home() {
           <div className="flex flex-col items-center lg:items-start text-center lg:text-left">
             <FadeIn delay={0}>
               <span className="font-accent text-sand-dark text-xl">
-                Frontend Developer · UX Designer · Product Thinker ✦
+                Frontend Development · UX Design · Product Thinking ✦
               </span>
             </FadeIn>
 
             <FadeIn delay={0.1}>
               <h1 className="font-display text-5xl md:text-6xl lg:text-7xl leading-[1.05] mt-4 max-w-3xl">
                 <span className="block text-charcoal">Design that thinks.</span>
-                <em style={{ color: "#C4956A" }}>Code that feels.</em>
+                <em style={{ color: "#B67963" }}>Code that feels.</em>
               </h1>
             </FadeIn>
 
             <FadeIn delay={0.2}>
               <p className="font-body text-charcoal-light text-lg md:text-xl mt-6 max-w-xl leading-relaxed">
-                <span className="block mb-1">Hi, I'm Lisette.</span>I think
-                about the whole picture, the user, the experience, and the code
-                that brings it all to life.
+                I think about the whole picture — the user, the experience, and
+                the code that brings it all to life.
               </p>
             </FadeIn>
 
@@ -111,14 +102,14 @@ export default function Home() {
                 <Link
                   to="/projects"
                   className="px-8 py-4 text-cream rounded-full font-body font-medium text-base transition-opacity duration-300 hover:opacity-80"
-                  style={{ backgroundColor: "#C4956A" }}
+                  style={{ backgroundColor: "#B67963" }}
                 >
                   See my work
                 </Link>
                 <Link
                   to="/about"
-                  className="px-8 py-4 border text-charcoal rounded-full font-body font-medium text-base transition-colors duration-300 hover:text-[#C4956A]"
-                  style={{ borderColor: "#C4956A66" }}
+                  className="px-8 py-4 border rounded-full font-body font-medium text-base transition-opacity duration-300 hover:opacity-70"
+                  style={{ borderColor: "#B67963", color: "#B67963" }}
                 >
                   About me
                 </Link>
@@ -140,15 +131,9 @@ export default function Home() {
       </section>
 
       {/* ── WHAT I DO ── */}
-      <div className="relative w-full" style={{ background: "#f0ebe3" }}>
-        <WaveDivider
-          fill="#FAF7F2"
-          flip
-          wavy
-          height="h-44 md:h-60"
-          className="relative z-10"
-        />
-        <section className="relative z-10 w-full -mt-20 md:-mt-28 pt-4 pb-28 flex justify-center">
+      <div className="relative w-full">
+        <WaveDivider fill="#f0ebe3" />
+        <section className="w-full bg-[#f0ebe3] pt-8 pb-28 flex justify-center">
           <div className="w-full max-w-[72rem] px-8 md:px-14">
             <FadeIn>
               <div className="text-center mb-12">
@@ -159,14 +144,14 @@ export default function Home() {
             </FadeIn>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-stretch">
               {whatIDo.map((item, i) => {
-                const borderColors = ["#7A9E87", "#C9A87C", "#D4897A"];
+                const borderColors = ["#B67963b0", "#C9A87Cb0", "#D4897Ab0"];
                 return (
                   <FadeIn key={item.title} delay={i * 0.1} className="flex">
-                    <div
-                      className="flex flex-col items-center text-center gap-5 p-10 pt-12 rounded-3xl bg-cream shadow-[0_4px_24px_rgba(44,44,42,0.10)] hover:shadow-[0_8px_32px_rgba(44,44,42,0.15)] transition-shadow w-full min-h-75 overflow-hidden relative"
-                      style={{ borderTop: `4px solid ${borderColors[i]}` }}
-                    >
-                      <div className="w-14 h-14 rounded-2xl bg-cream flex items-center justify-center shadow-sm">
+                    <div className="flex flex-col items-center text-center gap-5 p-10 pt-12 rounded-3xl bg-cream shadow-[0_4px_24px_rgba(44,44,42,0.10)] hover:shadow-[0_8px_32px_rgba(44,44,42,0.15)] transition-shadow w-full min-h-75 overflow-hidden relative">
+                      <div
+                        className="w-14 h-14 rounded-2xl flex items-center justify-center shadow-sm"
+                        style={{ backgroundColor: `${borderColors[i]}22` }}
+                      >
                         {item.icon}
                       </div>
                       <h3 className="font-display text-2xl text-charcoal">
@@ -182,6 +167,7 @@ export default function Home() {
             </div>
           </div>
         </section>
+        <WaveDivider fill="#f0ebe3" flip className="-mt-1" />
       </div>
 
       {/* ── FEATURED PROJECTS ── */}

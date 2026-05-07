@@ -3,7 +3,7 @@ import WaveDivider from "../components/WaveDivider";
 import PageTransition from "../components/PageTransition";
 import FadeIn from "../components/FadeIn";
 import liseImg from "../assets/Lisette1.png";
-import cvUrl from "../assets/CV-Lisette.pdf";
+import cvUrl from "../assets/CV-Lisette.pdf?url";
 
 const uxSkills = [
   "User-centered design",
@@ -41,7 +41,7 @@ const timeline = [
     period: "Jan 2025 – Ongoing",
     title: "Frontend Developer",
     place: "Yrkeshögskolan Borås",
-    accent: "#7A9E87",
+    accent: "#C4956A",
   },
   {
     period: "Jan 2026 – Mar 2026",
@@ -80,19 +80,21 @@ export default function About() {
         className="w-full pt-32 pb-8 px-6 text-center flex flex-col items-center"
         style={{
           background:
-            "linear-gradient(160deg, #FAF7F2 0%, #edf2ef 60%, #FAF7F2 100%)",
+            "linear-gradient(160deg, #FAF7F2 0%, #f5e6de 60%, #FAF7F2 100%)",
         }}
       >
         <FadeIn>
           <span className="font-accent text-sand-dark text-xl">
-            ...and once ran her own business for a decade
+            ...about me
           </span>
         </FadeIn>
         <FadeIn delay={0.1}>
-          <h1 className="font-display text-6xl md:text-8xl text-charcoal mt-4 leading-tight max-w-3xl mx-auto">
+          <h1 className="font-display text-5xl md:text-6xl text-charcoal mt-4 leading-tight max-w-3xl mx-auto">
             The frontend developer
             <br />
-            <em className="text-sage-dark text-4xl md:text-6xl">who thinks in design.</em>
+            <em className="text-sage-dark text-3xl md:text-5xl">
+              who thinks in design.
+            </em>
           </h1>
         </FadeIn>
       </section>
@@ -166,31 +168,37 @@ export default function About() {
               </p>
             </FadeIn>
             <FadeIn delay={0.4}>
-              <div className="flex items-center gap-3 pt-2">
-                <span className="font-body text-sm text-charcoal-light">
-                  Languages:
-                </span>
-                {["Swedish (native)", "English", "Danish"].map((lang) => (
-                  <span
-                    key={lang}
-                    className="font-body text-xs px-4 py-1.5 rounded-full bg-sage/10 text-sage-dark border border-sage/20"
-                  >
-                    {lang}
-                  </span>
-                ))}
-              </div>
-            </FadeIn>
-            <FadeIn delay={0.5}>
               <a
                 href={cvUrl}
                 download="CV-Lisette.pdf"
                 className="inline-flex items-center gap-2.5 px-6 py-3 rounded-full border border-charcoal/20 text-charcoal font-body text-sm hover:border-sage hover:text-sage transition-colors mt-2"
               >
                 <svg width="15" height="15" viewBox="0 0 15 15" fill="none">
-                  <path d="M7.5 1v9m0 0L4.5 7m3 3L10.5 7M2 13h11" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" />
+                  <path
+                    d="M7.5 1v9m0 0L4.5 7m3 3L10.5 7M2 13h11"
+                    stroke="currentColor"
+                    strokeWidth="1.3"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
                 </svg>
                 Download CV
               </a>
+            </FadeIn>
+            <FadeIn delay={0.5}>
+              <div className="pt-6 border-t border-sand/20 mt-2">
+                <p className="font-body text-xs text-charcoal-light uppercase tracking-widest mb-3">Languages</p>
+                <div className="flex flex-wrap gap-2">
+                  {["Swedish (native)", "English", "Danish"].map((lang) => (
+                    <span
+                      key={lang}
+                      className="font-body text-xs px-4 py-1.5 rounded-full bg-sand/10 text-charcoal-light border border-sand/20"
+                    >
+                      {lang}
+                    </span>
+                  ))}
+                </div>
+              </div>
             </FadeIn>
           </div>
         </div>
@@ -258,6 +266,7 @@ export default function About() {
                 ))}
               </div>
             </div>
+
           </div>
         </section>
         <WaveDivider fill="#f0ebe3" flip className="-mt-1" />

@@ -37,7 +37,6 @@ export default function Contact() {
     const form = e.currentTarget
     const data = new FormData(form)
 
-    // Replace YOUR_FORM_ID with your Formspree form ID from formspree.io
     const res = await fetch('https://formspree.io/f/mzdoejnq', {
       method: 'POST',
       body: data,
@@ -57,7 +56,7 @@ export default function Contact() {
       {/* ── HERO ── */}
       <section
         className="w-full pt-32 pb-4 px-6 text-center relative overflow-hidden flex flex-col items-center"
-        style={{ background: 'linear-gradient(160deg, #FAF7F2 0%, #edf2ef 55%, #f5ede4 100%)' }}
+        style={{ background: 'linear-gradient(160deg, #FAF7F2 0%, #f5e6de 55%, #f5ede4 100%)' }}
       >
         <BotanicalLeft />
         <BotanicalRight />
@@ -85,25 +84,13 @@ export default function Contact() {
           {/* ── left: info ── */}
           <div className="lg:col-span-2 space-y-5">
             <FadeIn>
-              <div className="p-6 rounded-3xl bg-[#e8f0ea]">
+              <div className="p-6 rounded-3xl bg-[#f0ebe3]">
                 <span className="font-accent text-sage-dark text-base">location</span>
                 <p className="font-display text-2xl text-charcoal mt-1">Helsingborg, Sweden</p>
               </div>
             </FadeIn>
 
             <FadeIn delay={0.08}>
-              <div className="p-6 rounded-3xl bg-[#f0ebe3]">
-                <span className="font-accent text-sand-dark text-base">email</span>
-                <a
-                  href="mailto:lisettestorm@hotmail.com"
-                  className="font-body text-sm text-charcoal hover:text-sage transition-colors block mt-1"
-                >
-                  lisettestorm@hotmail.com
-                </a>
-              </div>
-            </FadeIn>
-
-            <FadeIn delay={0.16}>
               <div className="p-6 rounded-3xl bg-[#f5e8e5]">
                 <span className="font-accent text-rose-dark text-base">find me online</span>
                 <div className="flex flex-col gap-3 mt-3">
@@ -141,7 +128,7 @@ export default function Contact() {
               <motion.div
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
-                className="p-12 rounded-3xl bg-[#e8f0ea] text-center"
+                className="p-12 rounded-3xl bg-[#f0ebe3] text-center"
               >
                 <span className="text-4xl text-sage">✦</span>
                 <h2 className="font-display text-4xl text-charcoal mt-4">Message sent!</h2>
@@ -193,7 +180,7 @@ export default function Contact() {
 
                 {status === 'error' && (
                   <p className="font-body text-xs text-rose-dark">
-                    Something went wrong. Please try again or email me directly.
+                    Something went wrong. Please try again.
                   </p>
                 )}
 

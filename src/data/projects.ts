@@ -42,8 +42,8 @@ export const projects: Project[] = [
       "Wireframes",
       "Interactive prototype",
     ],
-    color: "#7A9E87",
-    accentColor: "#e8f0ea",
+    color: "#B67963",
+    accentColor: "#eedcd5",
     rotation: "-1.2deg",
     featured: true,
     size: "medium",
@@ -128,7 +128,7 @@ export const projects: Project[] = [
     featured: true,
     size: "medium",
     image: optichaingImg,
-    links: [{ label: "Live website", url: "#" }],
+    links: [{ label: "Live website", url: "https://optichain.se/" }],
   },
   {
     id: "kanban-board",
@@ -146,7 +146,7 @@ export const projects: Project[] = [
     size: "medium",
     image: kanbanImg,
     links: [
-      { label: "GitHub", url: "#" },
+      { label: "GitHub", url: "https://github.com/Lisette93/KanbanBoard" },
       { label: "Live demo", url: "https://lisette93.github.io/KanbanBoard/" },
     ],
   },
@@ -166,7 +166,7 @@ export const projects: Project[] = [
     size: "small",
     image: studentPortalImg,
     links: [
-      { label: "GitHub", url: "#" },
+      { label: "GitHub", url: "https://github.com/Lisette93/StudentPortal" },
       { label: "Live demo", url: "https://lisette93.github.io/StudentPortal/" },
     ],
   },
