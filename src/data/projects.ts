@@ -53,6 +53,10 @@ export const projects: Project[] = [
         label: "View prototype",
         url: "https://www.figma.com/proto/aOfhdCWcCwQ6GXwmK1gE7k/Untitled?node-id=1-2&viewport=628%2C82%2C0.94&t=tDE5v0ztQ2VRHeg3-1&scaling=scale-down&content-scaling=fixed&page-id=0%3A1",
       },
+      {
+        label: "View process",
+        url: "https://www.figma.com/board/1ApnxeZ99IipRoxmbckh5I/HealthApp?node-id=0-1&t=Xj4j2HziYOiH5cGL-1",
+      },
     ],
   },
   {
@@ -79,7 +83,10 @@ export const projects: Project[] = [
     featured: false,
     size: "medium",
     image: leksaksbibliotekImg,
-    links: [{ label: "View prototype", url: "https://www.figma.com/proto/IjWeaK8KZZXxvIS2Qh8A82/Enh%C3%B6rningstanternas-snygg-figma?node-id=6-53&scaling=scale-down&content-scaling=fixed&t=PkdXdtJGGKdC2eiJ-1&page-id=0%3A1" }],
+    links: [
+      { label: "View prototype", url: "https://www.figma.com/proto/IjWeaK8KZZXxvIS2Qh8A82/Enh%C3%B6rningstanternas-snygg-figma?node-id=6-53&scaling=scale-down&content-scaling=fixed&t=PkdXdtJGKdC2eiJ-1&page-id=0%3A1" },
+      { label: "View process", url: "https://www.figma.com/board/q5SayjTnDSilmJgYNY9813/Enh%C3%B6rningstanterna?node-id=0-1&t=XFQxekg8yjtSyhUP-1" },
+    ],
   },
   {
     id: "wandering-bags",
@@ -105,7 +112,10 @@ export const projects: Project[] = [
     featured: false,
     size: "medium",
     image: vandrandekassarImg,
-    links: [{ label: "View prototype", url: "https://www.figma.com/proto/4v4lv65dPbsVzXCG7tLwdw/SLUTPROJEKT-UX-EH-Vandrande-kasse?node-id=274-59&p=f&viewport=1283%2C92%2C0.05&t=x5QYZ6A7kJKgASg2-1&scaling=min-zoom&content-scaling=fixed&starting-point-node-id=274%3A59&show-proto-sidebar=1&page-id=270%3A114" }],
+    links: [
+      { label: "View prototype", url: "https://www.figma.com/proto/4v4lv65dPbsVzXCG7tLwdw/SLUTPROJEKT-UX-EH-Vandrande-kasse?node-id=274-59&p=f&viewport=1283%2C92%2C0.05&t=x5QYZ6A7kJKgASg2-1&scaling=min-zoom&content-scaling=fixed&starting-point-node-id=274%3A59&show-proto-sidebar=1&page-id=270%3A114" },
+      { label: "View process", url: "https://www.figma.com/board/kFk0DvIAUoYUJZQyRIx6tW/FigJam-vandrande-kasse-UX-EH?node-id=0-1&t=wFc7L0nAhoThB8RX-1" },
+    ],
   },
   {
     id: "optichain",
