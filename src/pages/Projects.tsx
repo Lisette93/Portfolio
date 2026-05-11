@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import PageTransition from '../components/PageTransition'
 import WaveDivider from '../components/WaveDivider'
@@ -252,12 +253,12 @@ export default function Projects() {
             <h2 className="font-display text-4xl md:text-5xl text-charcoal mt-2 mb-6">
               Got a project in mind?
             </h2>
-            <a
-              href="/contact"
+            <Link
+              to="/contact"
               className="inline-block px-8 py-3.5 bg-sage text-cream rounded-full font-body font-medium text-sm hover:bg-sage-light transition-colors"
             >
               Get in touch →
-            </a>
+            </Link>
           </FadeIn>
         </section>
         <WaveDivider fill="#f0ebe3" flip className="-mt-1" />
