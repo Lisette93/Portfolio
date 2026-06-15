@@ -4,6 +4,7 @@ import studentPortalImg from "../assets/StudentPortal.png";
 import healthAppImg from "../assets/HealthApp.png";
 import leksaksbibliotekImg from "../assets/leksaksbibliotek.png";
 import vandrandekassarImg from "../assets/vandrandekassar.png";
+import alienPlanetImg from "../assets/aliensframe2.png";
 
 export interface Project {
   id: string;
@@ -19,7 +20,8 @@ export interface Project {
   links: { label: string; url: string }[];
   deliverables?: string[];
   size?: "large" | "medium" | "small";
-  image?: string; // optional screenshot shown in the card preview
+  image?: string;
+  imagePad?: string;
 }
 
 export const projects: Project[] = [
@@ -158,6 +160,27 @@ export const projects: Project[] = [
     links: [
       { label: "GitHub", url: "https://github.com/Lisette93/KanbanBoard" },
       { label: "Live demo", url: "https://lisette93.github.io/KanbanBoard/" },
+    ],
+  },
+  {
+    id: "alien-planet",
+    title: "Alien Planet",
+    category: "FRONTEND PROJECT",
+    shortDesc:
+      "Group project where we built a fullstack alien database with React, TypeScript and Node.js — I was responsible for the frontend, component design, filtering and AI-generated visuals.",
+    longDesc:
+      "Alien Planet is a fullstack school project built as a team using an agile workflow — daily standups, sprints, sprint reviews and retrospectives tracked via a GitHub Projects kanban board. The app is a database of alien species and their home planets, with a 1:N relationship between planet and aliens.\n\nI handled the frontend together with a classmate: card components for aliens and planets, client-side filtering with useMemo, and TypeScript interfaces for the full data model. I also took ownership of the visual identity — generating AI images with a dark neon aesthetic in purples, blues and teals that runs throughout the entire app.",
+    tags: ["React", "TypeScript", "Node.js", "Fullstack", "Agile", "Git"],
+    color: "#6B5B9E",
+    accentColor: "#e0dbf0",
+    rotation: "0.8deg",
+    featured: false,
+    size: "medium",
+    image: alienPlanetImg,
+    imagePad: "p-4",
+    links: [
+      { label: "Live demo", url: "https://alien-planet.onrender.com/" },
+      { label: "GitHub", url: "https://github.com/MattiasKopparberg/Alien-planet" },
     ],
   },
   {

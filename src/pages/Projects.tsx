@@ -46,7 +46,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
         {/* screenshot preview — only shown when project.image is set */}
         {project.image && (
           <div
-            className="h-44 overflow-hidden flex items-center justify-center"
+            className={`h-44 overflow-hidden flex items-center justify-center ${project.imagePad ?? ""}`}
             style={{ backgroundColor: project.accentColor }}
           >
             <img
