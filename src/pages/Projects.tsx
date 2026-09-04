@@ -6,239 +6,194 @@ import WaveDivider from '../components/WaveDivider'
 import FadeIn from '../components/FadeIn'
 import { projects, type Project } from '../data/projects'
 
-/* decorative soft SVG blob used as card background accent */
-function BlobAccent({ color, className = '' }: { color: string; className?: string }) {
-  return (
-    <svg
-      viewBox="0 0 220 180"
-      className={`absolute pointer-events-none opacity-30 ${className}`}
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M100,20 C140,10 190,30 200,80 C210,130 170,160 120,165 C70,170 20,145 10,100 C0,55 60,30 100,20 Z"
-        fill={color}
-      />
-    </svg>
-  )
+const INK = '#35302C'
+const BODY = '#5F564F'
+const LABEL = '#9A8B80'
+const FAINT = '#B0A69E'
+
+type Filter = 'All' | 'UX' | 'Frontend'
+
+function groupOf(p: Project): 'UX' | 'Frontend' {
+  return p.category === 'UX PROJECT' ? 'UX' : 'Frontend'
 }
 
-function ProjectCard({ project, index }: { project: Project; index: number }) {
-  const [hovered, setHovered] = useState(false)
-  const isLarge = project.size === 'large'
+function Star({ className = '' }: { className?: string }) {
+  return <span aria-hidden="true" className={className}>✦</span>
+}
+
+function ProjectCard({ project, index, num }: { project: Project; index: number; num: number }) {
+  const isUx = project.category === 'UX PROJECT'
+  const primaryLink = project.links[0]
+  const secondaryLinks = project.links.slice(1)
 
   return (
-    <FadeIn delay={index * 0.1} className={isLarge ? 'md:col-span-2' : ''}>
+    <FadeIn delay={Math.min(index, 5) * 0.06} className={index % 2 === 1 ? 'lg:mt-[60px]' : ''}>
       <motion.article
-        style={{ rotate: project.rotation, backgroundColor: project.accentColor }}
-        whileHover={{ rotate: '0deg', y: -8, scale: 1.01 }}
-        transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-        onHoverStart={() => setHovered(true)}
-        onHoverEnd={() => setHovered(false)}
-        className="relative rounded-4xl overflow-hidden shadow-[0_6px_30px_rgba(44,44,42,0.09)] hover:shadow-[0_16px_50px_rgba(44,44,42,0.16)] transition-shadow group"
+        whileHover={{ y: -4 }}
+        transition={{ duration: 0.26, ease: 'easeOut' }}
+        className="rounded-[4px_4px_26px_26px] overflow-hidden border shadow-[0_20px_44px_-38px_rgba(88,63,48,0.5)] hover:shadow-[0_30px_60px_-44px_rgba(88,63,48,0.55)] transition-shadow"
+        style={{ background: '#FEFCFA', borderColor: 'rgba(53,48,44,0.07)' }}
       >
-        {/* blob accent decoration */}
-        <BlobAccent color={project.color} className="w-48 -top-8 -right-8" />
-        <BlobAccent color={project.color} className="w-32 -bottom-6 -left-6 rotate-180" />
+        <div className="h-1 w-full" style={{ background: project.color }} />
 
-        {/* top color bar */}
-        <div className="h-1.5 w-full" style={{ background: `linear-gradient(90deg, ${project.color}, ${project.color}88)` }} />
-
-        {/* screenshot preview — only shown when project.image is set */}
-        {project.image && (
-          <div
-            className={`h-44 overflow-hidden flex items-center justify-center ${project.imagePad ?? ""}`}
-            style={{ backgroundColor: project.accentColor }}
-          >
-            <img
-              src={project.image}
-              alt={project.title}
-              className="w-full h-full object-contain"
-            />
-          </div>
-        )}
-
-        <div className={`relative z-10 p-7 md:p-9 ${isLarge ? 'md:flex md:gap-10' : ''}`}>
-
-          {/* ── left / main content ── */}
-          <div className={isLarge ? 'md:flex-1' : ''}>
-            {/* category badge */}
-            <span
-              className="font-accent text-sm font-medium px-4 py-1.5 rounded-full inline-block mb-4"
-              style={{ color: project.color, backgroundColor: project.color + '18', border: `1px solid ${project.color}33` }}
-            >
-              {project.category}
-            </span>
-
-            <h2 className="font-display text-3xl md:text-4xl text-charcoal leading-tight mb-3">
-              {project.title}
-            </h2>
-
-            <p className="font-body text-charcoal-light text-sm leading-relaxed mb-5">
-              {project.shortDesc}
-            </p>
-
-            {/* tags */}
-            <div className="flex flex-wrap gap-2 mb-6">
-              {project.tags.map(tag => (
-                <span
-                  key={tag}
-                  className="font-body text-xs px-4 py-2 rounded-full bg-cream/70 text-charcoal-light border border-sand/20"
-                >
-                  {tag}
-                </span>
-              ))}
+        <div className="relative h-64 sm:h-[340px] p-6 sm:p-8 pb-0" style={{ background: project.accentColor }}>
+          {project.image ? (
+            <div className={`absolute inset-0 p-6 sm:p-8 flex items-end justify-center ${project.imagePad ?? ''}`}>
+              <img src={project.image} alt={project.title} className="w-full h-full object-contain object-bottom" />
             </div>
-
-            {/* links */}
-            <div className="flex flex-wrap gap-3">
-              {project.links.map(link => (
-                <a
-                  key={link.label}
-                  href={link.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="font-body text-xs px-5 py-2.5 rounded-full inline-flex items-center gap-2 transition-all"
-                  style={{
-                    backgroundColor: project.color,
-                    color: '#FAF7F2',
-                  }}
-                  onClick={e => link.url === '#' && e.preventDefault()}
-                >
-                  {link.label}
-                  <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
-                    <path d="M2 8L8 2M8 2H4M8 2V6" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
-                </a>
-              ))}
+          ) : (
+            <div className="absolute inset-0 flex items-center justify-center">
+              <span className="font-body text-xs italic" style={{ color: BODY }}>{project.title} — screenshot</span>
             </div>
-          </div>
-
-          {/* ── right: deliverables (large card only) / expanded detail ── */}
-          {isLarge && project.deliverables && (
-            <AnimatePresence>
-              <motion.div
-                className="md:w-56 mt-8 md:mt-0 shrink-0"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.1 }}
-              >
-                <p className="font-accent text-sand-dark text-sm mb-3">deliverables ✦</p>
-                <ul className="space-y-1.5">
-                  {project.deliverables.map(d => (
-                    <li key={d} className="font-body text-xs text-charcoal-light flex items-center gap-2">
-                      <span className="w-1 h-1 rounded-full shrink-0" style={{ backgroundColor: project.color }} />
-                      {d}
-                    </li>
-                  ))}
-                </ul>
-              </motion.div>
-            </AnimatePresence>
           )}
         </div>
 
-        {/* hover overlay: long description */}
-        <AnimatePresence>
-          {hovered && (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.25 }}
-              className="absolute inset-0 z-20 flex items-end p-7 md:p-9 rounded-4xl"
-              style={{ background: `linear-gradient(160deg, ${project.color}cc, ${project.color}ee)` }}
-            >
-              <div className="w-full">
-                <p className="font-body text-cream/90 text-sm leading-relaxed mb-5">{project.longDesc}</p>
-                <div className="flex flex-wrap gap-3">
-                  {project.links.map(link => (
-                    <a
-                      key={link.label}
-                      href={link.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      onClick={e => link.url === '#' && e.preventDefault()}
-                      className="font-body text-xs px-5 py-2.5 rounded-full inline-flex items-center gap-2 bg-cream/20 border border-cream/40 text-cream hover:bg-cream/35 transition-colors"
-                    >
-                      {link.label}
-                      <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
-                        <path d="M2 8L8 2M8 2H4M8 2V6" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
-                      </svg>
-                    </a>
-                  ))}
-                </div>
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
+        <div className="p-7 sm:p-9">
+          <div className="flex items-baseline justify-between gap-5">
+            <div className="flex items-baseline gap-3.5">
+              <span className="font-display text-base" style={{ color: project.color }}>
+                {String(num).padStart(2, '0')}
+              </span>
+              <span className="font-body text-[11px] uppercase tracking-[0.18em]" style={{ color: LABEL }}>
+                {project.category}
+              </span>
+            </div>
+            <span className="font-body text-xs" style={{ color: FAINT }}>{project.year}</span>
+          </div>
+
+          <h2 className="font-display font-normal text-3xl sm:text-[38px] leading-tight tracking-[-0.01em] mt-3.5" style={{ color: INK }}>
+            {project.title}
+          </h2>
+          <p className="font-body font-light text-base leading-relaxed mt-3.5" style={{ color: BODY, textWrap: 'pretty' }}>
+            {project.shortDesc}
+          </p>
+
+          <div className="flex flex-wrap gap-2 mt-6">
+            {project.tags.map((tag) => (
+              <span
+                key={tag}
+                className="font-body text-[13px] font-light px-3.5 py-1.5 rounded-full border whitespace-nowrap"
+                style={{ color: '#7C6B5F', borderColor: 'rgba(53,48,44,0.12)' }}
+              >
+                {tag}
+              </span>
+            ))}
+          </div>
+
+          <div className="h-px my-6" style={{ background: 'rgba(53,48,44,0.08)' }} />
+
+          <div className="flex flex-wrap gap-2.5">
+            {isUx && (
+              <Link
+                to={`/projects/${project.id}`}
+                className="font-body text-sm font-medium px-5 py-3 rounded-full text-white whitespace-nowrap transition-colors"
+                style={{ background: project.color }}
+              >
+                Read the case study →
+              </Link>
+            )}
+            {primaryLink && (
+              <a
+                href={primaryLink.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`font-body text-sm px-5 py-3 rounded-full whitespace-nowrap border transition-colors ${isUx ? 'font-normal' : 'font-medium text-white'}`}
+                style={
+                  isUx
+                    ? { color: '#6B5A4E', borderColor: 'rgba(53,48,44,0.16)' }
+                    : { background: project.color, borderColor: project.color }
+                }
+              >
+                {isUx ? 'View prototype ↗' : primaryLink.label + ' ↗'}
+              </a>
+            )}
+            {secondaryLinks.map((link) => (
+              <a
+                key={link.label}
+                href={link.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-body text-sm font-normal px-5 py-3 rounded-full whitespace-nowrap border transition-colors"
+                style={{ color: '#6B5A4E', borderColor: 'rgba(53,48,44,0.16)' }}
+              >
+                {link.label} ↗
+              </a>
+            ))}
+          </div>
+        </div>
       </motion.article>
     </FadeIn>
   )
 }
 
 export default function Projects() {
-  const [filter, setFilter] = useState<'all' | 'UX PROJECT' | 'FRONTEND PROJECT'>('all')
+  const [filter, setFilter] = useState<Filter>('All')
 
-  const filtered = filter === 'all' ? projects : projects.filter(p => p.category === filter)
+  const filtered = filter === 'All' ? projects : projects.filter((p) => groupOf(p) === filter)
 
   return (
     <PageTransition>
-      {/* ── HERO ── */}
-      <section
-        className="w-full pt-32 pb-12 px-6 text-center flex flex-col items-center"
-        style={{ background: 'linear-gradient(160deg, #FAF7F2 0%, #f5e6de 60%, #f5ede4 100%)' }}
-      >
-        <FadeIn>
-          <span className="font-accent text-sand-dark text-xl">things I've made ✦</span>
-        </FadeIn>
-        <FadeIn delay={0.1}>
-          <h1 className="font-display text-6xl md:text-8xl text-charcoal mt-3 leading-tight">
-            My Work
-          </h1>
-        </FadeIn>
-        <FadeIn delay={0.2}>
-          <p className="font-body text-charcoal-light mt-5 max-w-md mx-auto text-base leading-relaxed">
-            UX research, design systems, and frontend builds — each project rooted in
-            how people actually use things.
-          </p>
-        </FadeIn>
-
-        {/* filter tabs */}
-        <FadeIn delay={0.3}>
-          <div className="flex items-center justify-center gap-3 mt-8 flex-wrap">
-            {(['all', 'UX PROJECT', 'FRONTEND PROJECT'] as const).map(f => (
-              <button
-                key={f}
-                onClick={() => setFilter(f)}
-                className={`font-body text-sm px-6 py-2.5 rounded-full border transition-all ${
-                  filter === f
-                    ? 'bg-charcoal text-cream border-charcoal'
-                    : 'bg-transparent text-charcoal-light border-charcoal/20 hover:border-sage hover:text-sage'
-                }`}
-              >
-                {f === 'all' ? 'All projects' : f}
-              </button>
-            ))}
+      {/* ── HEADER ── */}
+      <section className="w-full pt-32 pb-0 px-6">
+        <div className="max-w-[1240px] mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_260px] gap-10 items-end">
+            <FadeIn>
+              <span className="font-accent text-xl" style={{ color: '#A96C52' }}>selected work <Star /></span>
+              <h1 className="font-display font-normal text-6xl sm:text-7xl lg:text-8xl leading-none tracking-[-0.02em] mt-2.5" style={{ color: INK }}>
+                Projects
+              </h1>
+              <p className="font-body font-light text-lg leading-relaxed mt-5 max-w-[560px]" style={{ color: BODY, textWrap: 'pretty' }}>
+                UX work and things I've built. Each UX project has a full case study behind it — the process, the decisions, and what I'd do differently.
+              </p>
+            </FadeIn>
+            <FadeIn delay={0.1} className="lg:pb-2">
+              <div className="font-display text-5xl leading-none" style={{ color: '#DCC3B3' }}>
+                {String(filtered.length).padStart(2, '0')}
+              </div>
+              <div className="font-body text-xs uppercase tracking-[0.16em] mt-2" style={{ color: '#A2856F' }}>
+                projects shown
+              </div>
+            </FadeIn>
           </div>
-        </FadeIn>
+
+          <FadeIn delay={0.2}>
+            <div className="flex items-center gap-2.5 mt-12 pb-7 flex-wrap border-b" style={{ borderColor: 'rgba(53,48,44,0.1)' }}>
+              {(['All', 'UX', 'Frontend'] as const).map((f) => {
+                const active = f === filter
+                return (
+                  <button
+                    key={f}
+                    onClick={() => setFilter(f)}
+                    className="font-body text-sm px-5 py-2.5 rounded-full border whitespace-nowrap transition-colors"
+                    style={
+                      active
+                        ? { fontWeight: 500, color: '#FFFCFA', background: '#AE7159', borderColor: '#AE7159' }
+                        : { fontWeight: 300, color: '#6B5A4E', background: 'transparent', borderColor: 'rgba(53,48,44,0.14)' }
+                    }
+                  >
+                    {f === 'All' ? 'All work' : f}
+                  </button>
+                )
+              })}
+            </div>
+          </FadeIn>
+        </div>
       </section>
 
       {/* ── GRID ── */}
-      <section className="w-full py-24 flex justify-center">
-        <div className="w-full max-w-5xl px-8 md:px-14">
-          <motion.div
-            layout
-            className="grid grid-cols-1 md:grid-cols-2 gap-7"
-          >
+      <section className="w-full pt-14 pb-24 px-6">
+        <div className="max-w-[1240px] mx-auto">
+          <motion.div layout className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-11 items-start">
             <AnimatePresence mode="popLayout">
               {filtered.map((project, i) => (
-                <ProjectCard key={project.id} project={project} index={i} />
+                <ProjectCard key={project.id} project={project} index={i} num={i + 1} />
               ))}
             </AnimatePresence>
           </motion.div>
 
           {filtered.length === 0 && (
             <div className="text-center py-20">
-              <p className="font-accent text-sand-dark text-xl">nothing here yet ✦</p>
+              <p className="font-accent text-xl" style={{ color: '#A96C52' }}>nothing here yet ✦</p>
             </div>
           )}
         </div>

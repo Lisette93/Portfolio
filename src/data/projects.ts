@@ -6,10 +6,105 @@ import leksaksbibliotekImg from "../assets/leksaksbibliotek.png";
 import vandrandekassarImg from "../assets/vandrandekassar.png";
 import alienPlanetImg from "../assets/aliensframe2.png";
 
+export interface CaseStudyImage {
+  src?: string;
+  alt: string;
+}
+
+export interface CaseStudyPhase {
+  n: string;
+  title: string;
+  /** shown in the "My role in this phase" tag — required, never blank */
+  role: string;
+  intro: string;
+  before: string[];
+  did: string[];
+  found: string[];
+  takeaway: string;
+  images: [CaseStudyImage, CaseStudyImage];
+  caption: string;
+}
+
+export interface CaseStudyChange {
+  label: string;
+  title: string;
+  body: string;
+}
+
+export interface CaseStudyCompare {
+  intro: string;
+  beforeLabel: string;
+  afterLabel: string;
+  before: CaseStudyImage;
+  after: CaseStudyImage;
+  changes: CaseStudyChange[];
+}
+
+export interface CaseStudyAlternative {
+  label: string;
+  badge: "Chosen" | "Considered" | "Dropped";
+  title: string;
+  body: string;
+  why: string;
+  img: CaseStudyImage;
+}
+
+export interface CaseStudyAlternatives {
+  intro: string;
+  decision: string;
+  options: CaseStudyAlternative[];
+}
+
+export interface CaseStudyScreen extends CaseStudyImage {
+  caption: string;
+}
+
+export interface CaseStudyDeliverable {
+  label: string;
+  title: string;
+  body: string;
+}
+
+export interface CaseStudyDelivery {
+  intro: string;
+  prototypeHref: string;
+  screens: CaseStudyScreen[];
+  deliverables: CaseStudyDeliverable[];
+}
+
+export interface CaseStudyReflection {
+  n: string;
+  title: string;
+  points: string[];
+}
+
+export interface CaseStudy {
+  eyebrow: string;
+  tagline: string;
+  heroImage: CaseStudyImage;
+  /** exactly 3 — the short version, read standalone */
+  summary: { label: string; body: string }[];
+  overview: { heading: string; body: string[]; contribution: string };
+  facts: { label: string; value: string }[];
+  tools: string[];
+  /** 3-5 — layout must not assume a count */
+  phases: CaseStudyPhase[];
+  compare?: CaseStudyCompare;
+  alternatives?: CaseStudyAlternatives;
+  delivery: CaseStudyDelivery;
+  /** exactly 4 — Results / What I'd do differently / What I learned / Next steps */
+  reflections: CaseStudyReflection[];
+  /** derived colours: section backgrounds / role-tag background / label ink */
+  tintSoft: string;
+  accentSoft: string;
+  accentInk: string;
+}
+
 export interface Project {
   id: string;
   title: string;
   category: "UX PROJECT" | "FRONTEND PROJECT";
+  year: string;
   shortDesc: string;
   longDesc: string;
   tags: string[];
@@ -22,6 +117,8 @@ export interface Project {
   size?: "large" | "medium" | "small";
   image?: string;
   imagePad?: string;
+  /** presence of this is what creates a /projects/:id case study page */
+  caseStudy?: CaseStudy;
 }
 
 export const projects: Project[] = [
@@ -29,6 +126,7 @@ export const projects: Project[] = [
     id: "health-app",
     title: "Health App",
     category: "UX PROJECT",
+    year: "2025",
     shortDesc:
       "UX project where I designed a health and wellness app from empathy mapping through to an interactive Figma prototype.",
     longDesc:
@@ -44,8 +142,8 @@ export const projects: Project[] = [
       "Wireframes",
       "Interactive prototype",
     ],
-    color: "#B67963",
-    accentColor: "#eedcd5",
+    color: "#B0745C",
+    accentColor: "#EFDDD3",
     rotation: "-1.2deg",
     featured: true,
     size: "medium",
@@ -60,11 +158,325 @@ export const projects: Project[] = [
         url: "https://www.figma.com/board/1ApnxeZ99IipRoxmbckh5I/HealthApp?node-id=0-1&t=Xj4j2HziYOiH5cGL-1",
       },
     ],
+    caseStudy: {
+      eyebrow: "UX case study",
+      tagline:
+        "A one-week solo project: designing a wellness app for people who quit every wellness app — from four interviews to a tested Figma prototype.",
+      heroImage: { alt: "Health App — hi-fi screens from the final Figma prototype" },
+      tintSoft: "#F4E9E1",
+      accentSoft: "#E5CDC1",
+      accentInk: "#96634E",
+      summary: [
+        {
+          label: "The problem",
+          body: "People download a wellness app in a burst of motivation and stop opening it within a week — not because the content is bad, but because every session assumes 45 free minutes and a clear head.",
+        },
+        {
+          label: "My decision",
+          body: "A mood-first home screen instead of a category browse. The interviews showed people open the app already undecided and low on energy, so choosing a feeling had to be easier than choosing a workout.",
+        },
+        {
+          label: "The outcome",
+          body: "[3 of 4] testers started a session unaided, in three taps. The structure held under testing; the copy didn't — and that turned out to be the cheap fix.",
+        },
+      ],
+      overview: {
+        heading: "A wellness app for people who never make it past week one",
+        body: [
+          "Wellness apps assume you arrive with energy, time and a plan. The people I talked to arrived with none of those — they downloaded something in a burst of motivation and quietly stopped opening it a week later. I wanted to know what actually happens in that week.",
+          "Working alone over one week, I ran lean research, built a persona to keep myself honest, and designed a mood-first flow that gets someone into a session in three taps. The result is an interactive Figma prototype covering the full launch-to-session flow.",
+        ],
+        contribution:
+          "Sole designer end to end — I ran the interviews, did the synthesis, made every design call, and tested the prototype myself. The trade-offs on this page are mine to defend.",
+      },
+      facts: [
+        { label: "My role", value: "UX designer — sole designer, end to end" },
+        { label: "Team", value: "Solo project" },
+        { label: "Timeline", value: "1 week" },
+        { label: "Context", value: "[Course project / self-initiated]" },
+        { label: "Platform", value: "iOS app — Figma prototype" },
+      ],
+      tools: [
+        "Figma",
+        "FigJam",
+        "User interviews",
+        "Empathy mapping",
+        "Personas",
+        "User flows",
+        "Wireframing",
+        "Prototyping",
+        "Usability testing",
+      ],
+      phases: [
+        {
+          n: "01",
+          title: "Research & discovery",
+          role: "Interviewer",
+          intro:
+            "One week total, so research had to be small and decisive: find out why people quit, not everything about wellness.",
+          before: [
+            "Wellness apps were everywhere, but I had no evidence about why people abandon them.",
+            'The brief was broad — "a health app" — with no defined user and no defined problem.',
+            "No existing research to lean on, and no team to divide the work with.",
+          ],
+          did: [
+            "Ran [4] short interviews with people who had tried and quit a fitness or wellness app.",
+            "Reviewed [3] existing wellness apps, focused on onboarding and how a session starts.",
+            "Kept every note in one FigJam board so synthesis could start the same day.",
+          ],
+          found: [
+            "Time is the real blocker",
+            "Onboarding asks too much",
+            "Streaks create guilt",
+            "Wanted: short sessions",
+          ],
+          takeaway:
+            "People didn't quit because the content was bad — they quit because every session assumed they had 45 minutes and a clear head.",
+          images: [
+            { alt: "Interview notes and FigJam research board" },
+            { alt: "Competitor teardown of onboarding screens" },
+          ],
+          caption:
+            "Research board and competitor teardown — the raw material everything below came from.",
+        },
+        {
+          n: "02",
+          title: "Empathy mapping & personas",
+          role: "Synthesiser",
+          intro:
+            "Turning four conversations into one shared picture — the phase where I decide who I am not designing for.",
+          before: [
+            "Raw quotes from four interviews, no pattern yet.",
+            "Real risk of designing for myself instead of the people I'd talked to.",
+          ],
+          did: [
+            "Built an empathy map — says, thinks, does, feels — straight from the interview quotes.",
+            "Clustered it into [3] recurring needs and named the tension between them.",
+            "Wrote one primary persona and deliberately skipped a secondary one.",
+          ],
+          found: [
+            "Primary: the depleted beginner",
+            "Need: low-effort entry",
+            "Need: progress without pressure",
+            "Out of scope: advanced athletes",
+          ],
+          takeaway:
+            "The persona became a filter: every later decision had to answer one question — does this lower the effort of starting?",
+          images: [
+            { alt: "Empathy map — says, thinks, does, feels" },
+            { alt: "Primary persona summary card" },
+          ],
+          caption: "The empathy map and the persona it produced.",
+        },
+        {
+          n: "03",
+          title: "Ideation & information architecture",
+          role: "Decision-maker",
+          intro:
+            "A clear user and a clear need, but no product shape yet — this is where the structure got decided.",
+          before: [
+            "Too many plausible features competing for the home screen.",
+            "No flow: it was unclear how someone got from opening the app to actually moving.",
+          ],
+          did: [
+            "Sketched [8] home-screen concepts on paper in one sitting, then killed six.",
+            "Mapped the user flow from launch to finished session.",
+            "Cut the feature list to three: pick a mood, start a session, see progress.",
+          ],
+          found: ["Mood-first home screen", "Max 3 taps to start", "Progress as calm, not streaks"],
+          takeaway:
+            "I chose a mood-first entry over a category browse, because the interviews showed people open the app already undecided.",
+          images: [
+            { alt: "Paper sketches of home-screen concepts" },
+            { alt: "User flow / site map from launch to session" },
+          ],
+          caption: "Sketches and the flow they narrowed down to.",
+        },
+        {
+          n: "04",
+          title: "Wireframing & visual design",
+          role: "Designer",
+          intro:
+            "Making the structure real on screen, and choosing a tone that doesn't sound like a personal trainer.",
+          before: [
+            "The flow worked on paper but the hierarchy was untested on screen.",
+            "No visual direction — the app risked looking like every other fitness app.",
+          ],
+          did: [
+            "Lo-fi wireframes for [6] key screens in Figma.",
+            "Set a small type and colour scale before touching layout.",
+            "Moved to hi-fi only once the wireframes stopped changing.",
+          ],
+          found: [
+            "Warm, quiet palette",
+            "Large-photo session cards",
+            "Serif headings",
+            "One primary action per screen",
+          ],
+          takeaway:
+            "The visual direction was a decision, not decoration — warm and quiet, to counter the shouty tone the interviewees said put them off.",
+          images: [
+            { alt: "Lo-fi wireframes of the core screens" },
+            { alt: "Type scale, colour palette and component set" },
+          ],
+          caption: "From wireframe to visual direction.",
+        },
+        {
+          n: "05",
+          title: "Prototype & user testing",
+          role: "Test lead",
+          intro: "The last phase, and the only one that could tell me whether any of the above was right.",
+          before: [
+            "The prototype felt obvious to me — I had built it.",
+            "Two questions I couldn't answer alone: was the mood step understood, and was session length clear?",
+          ],
+          did: [
+            "Wired an interactive Figma prototype for the core flow.",
+            "Tested with [4] people on one task: start a session that fits 15 minutes.",
+            "Logged every hesitation, then iterated twice.",
+          ],
+          found: [
+            "[3 of 4] finished unaided",
+            "Mood labels reworded",
+            "Duration moved up the card",
+            "Fixed: unclear back behaviour",
+          ],
+          takeaway: "Testing changed the copy far more than the layout — the structure held, the words didn't.",
+          images: [
+            { alt: "Prototype flow laid out in Figma" },
+            { alt: "Usability test notes and issue prioritisation" },
+          ],
+          caption: "The tested prototype and the notes that changed it.",
+        },
+      ],
+      compare: {
+        intro:
+          "One screen changed more than any other after testing. Same structure, different words and hierarchy — worth showing side by side because the fix was cheap and the effect wasn't.",
+        beforeLabel: "First hi-fi version",
+        afterLabel: "After two rounds of testing",
+        before: { alt: "Session card before testing — mood names and duration at the bottom" },
+        after: { alt: "Session card after testing — reworded moods, duration moved up" },
+        changes: [
+          {
+            label: "Change 01",
+            title: "Mood labels rewritten",
+            body: '"Restore" and "Power" meant nothing to testers cold. Reworded to describe how you feel, not what the session is called.',
+          },
+          {
+            label: "Change 02",
+            title: "Duration moved up",
+            body: "Session length sat at the bottom of the card. Moved next to the title — the single thing everyone looked for first.",
+          },
+          {
+            label: "Change 03",
+            title: "Back behaviour fixed",
+            body: "Leaving a session dropped people to the home screen. Now it returns to the list they came from.",
+          },
+        ],
+      },
+      alternatives: {
+        intro:
+          "The entry point was the real decision on this project — how someone chooses what to do in the first five seconds. I built out three and compared them against the same persona.",
+        decision:
+          "I chose mood-first over browse because the persona's blocker was decision-making, not content — accepting that it scales worse as the library grows, which is why browse stayed as a second route in.",
+        options: [
+          {
+            label: "Direction A",
+            badge: "Chosen",
+            title: "Mood first",
+            body: "The home screen asks how you feel, then offers two or three sessions that match.",
+            why: "Won because interviewees described opening the app undecided and low on energy. Choosing a feeling is easier than choosing a workout.",
+            img: { alt: "Direction A — mood-first home screen" },
+          },
+          {
+            label: "Direction B",
+            badge: "Considered",
+            title: "Browse by category",
+            body: "A conventional library — yoga, strength, breathing — with filters.",
+            why: "Familiar and scalable, but it puts the decision on someone who told me they can't make it. Kept as a secondary tab instead.",
+            img: { alt: "Direction B — browse-by-category home screen" },
+          },
+          {
+            label: "Direction C",
+            badge: "Dropped",
+            title: "Guided weekly plan",
+            body: "A fixed programme that tells you what to do each day.",
+            why: "Dropped early: it recreates exactly the pressure and guilt that made people stop using their last app.",
+            img: { alt: "Direction C — guided weekly plan concept" },
+          },
+        ],
+      },
+      delivery: {
+        intro:
+          "An interactive Figma prototype covering the full flow from launch to a finished session, plus the small set of foundations it was built on.",
+        prototypeHref:
+          "https://www.figma.com/proto/aOfhdCWcCwQ6GXwmK1gE7k/Untitled?node-id=1-2&viewport=628%2C82%2C0.94&t=tDE5v0ztQ2VRHeg3-1&scaling=scale-down&content-scaling=fixed&page-id=0%3A1",
+        screens: [
+          { alt: "Hi-fi mood-first home screen", caption: "Home — pick how you feel" },
+          { alt: "Hi-fi session list screen", caption: "Sessions — matched to the mood" },
+          { alt: "Hi-fi session detail and progress screen", caption: "Session — one clear action" },
+        ],
+        deliverables: [
+          {
+            label: "Prototype",
+            title: "Clickable in Figma",
+            body: "[X] screens, the complete launch-to-session flow clickable end to end.",
+          },
+          {
+            label: "Foundations",
+            title: "Type, colour, components",
+            body: "A deliberately small system: one type scale, one warm palette, the four components the flow needed.",
+          },
+          {
+            label: "Handoff",
+            title: "Documented decisions",
+            body: "Each design call written down with the research it came from — the basis for this case study.",
+          },
+        ],
+      },
+      reflections: [
+        {
+          n: "01",
+          title: "Results",
+          points: [
+            "[3 of 4] testers started a session unaided, with no guidance from me.",
+            "The structure held up under testing; the copy did not — and that was the cheapest thing to fix.",
+            "Delivered a clickable prototype of the full core flow in one week, working alone.",
+          ],
+        },
+        {
+          n: "02",
+          title: "What I'd do differently",
+          points: [
+            "Test at wireframe stage. I waited for hi-fi, so I was fixing wording in polished screens — slower and more precious than it needed to be.",
+            "Recruit one participant outside my own network. A friendly sample is a soft sample.",
+          ],
+        },
+        {
+          n: "03",
+          title: "What I learned",
+          points: [
+            "A persona is only useful if it can say no to a feature. Mine did, twice.",
+            "Working solo, writing decisions down was what kept me honest — there was nobody to argue with.",
+          ],
+        },
+        {
+          n: "04",
+          title: "Next steps",
+          points: [
+            "Validate whether calm progress actually brings people back after week one — the whole premise rests on it.",
+            "Test the mood entry with people who already exercise regularly, to see if it generalises.",
+            "Design the empty and error states; the prototype only covers the happy path.",
+          ],
+        },
+      ],
+    },
   },
   {
     id: "toy-library",
     title: "Toy Library",
     category: "UX PROJECT",
+    year: "2025",
     shortDesc:
       "Group project — UX design for a toy library service, from user research and personas through to an interactive prototype.",
     longDesc:
@@ -79,8 +491,8 @@ export const projects: Project[] = [
       "Wireframes",
       "Interactive prototype",
     ],
-    color: "#C4956A",
-    accentColor: "#f5ede4",
+    color: "#B08F54",
+    accentColor: "#F0E5D3",
     rotation: "1deg",
     featured: false,
     size: "medium",
@@ -89,11 +501,111 @@ export const projects: Project[] = [
       { label: "View prototype", url: "https://www.figma.com/proto/IjWeaK8KZZXxvIS2Qh8A82/Enh%C3%B6rningstanternas-snygg-figma?node-id=6-53&scaling=scale-down&content-scaling=fixed&t=PkdXdtJGKdC2eiJ-1&page-id=0%3A1" },
       { label: "View process", url: "https://www.figma.com/board/q5SayjTnDSilmJgYNY9813/Enh%C3%B6rningstanterna?node-id=0-1&t=XFQxekg8yjtSyhUP-1" },
     ],
+    caseStudy: {
+      eyebrow: "UX case study",
+      tagline:
+        "[Placeholder tagline] — a group project designing a toy library service, from user research through to an interactive Figma prototype.",
+      heroImage: { alt: "Toy Library — hi-fi screens from the final Figma prototype" },
+      tintSoft: "#F5EDE1",
+      accentSoft: "#E6D8C0",
+      accentInk: "#967A47",
+      summary: [
+        { label: "The problem", body: "[Placeholder — the specific problem the team identified, confirmed against the research]" },
+        { label: "My decision", body: "[Placeholder — the design decision you personally pushed for, and why]" },
+        { label: "The outcome", body: "[Placeholder — what testing or delivery showed]" },
+      ],
+      overview: {
+        heading: "[Placeholder overview heading]",
+        body: [
+          "[Placeholder — one or two sentences on the problem space and who the team designed for.]",
+          "[Placeholder — how the team worked and what the prototype covers.]",
+        ],
+        contribution:
+          "[Placeholder — name your specific contribution on this group project: which research, which decisions, which screens were yours.]",
+      },
+      facts: [
+        { label: "My role", value: "[Placeholder — e.g. UX designer / researcher on a team of N]" },
+        { label: "Team", value: "Group project" },
+        { label: "Timeline", value: "[Placeholder]" },
+        { label: "Context", value: "[Course project]" },
+        { label: "Platform", value: "[Placeholder] — Figma prototype" },
+      ],
+      tools: ["Figma", "FigJam", "User interviews", "Empathy mapping", "Personas", "Journey mapping", "Wireframing", "Prototyping"],
+      phases: [
+        {
+          n: "01",
+          title: "Research & discovery",
+          role: "[Placeholder — your role in this phase]",
+          intro: "[Placeholder — what the team needed to learn before designing anything.]",
+          before: ["[Placeholder — where things stood before research]"],
+          did: ["[Placeholder — what the team actually did]"],
+          found: ["[Placeholder finding]", "[Placeholder finding]"],
+          takeaway: "[Placeholder — one-sentence takeaway from this phase]",
+          images: [
+            { alt: "[Placeholder — research board or interview notes]" },
+            { alt: "[Placeholder — competitor teardown]" },
+          ],
+          caption: "[Placeholder caption]",
+        },
+        {
+          n: "02",
+          title: "Personas & journey mapping",
+          role: "[Placeholder — your role in this phase]",
+          intro: "[Placeholder — how research turned into a shared user picture.]",
+          before: ["[Placeholder]"],
+          did: ["[Placeholder — empathy map and persona work]", "[Placeholder — journey mapping]"],
+          found: ["[Placeholder finding]", "[Placeholder finding]"],
+          takeaway: "[Placeholder — one-sentence takeaway from this phase]",
+          images: [
+            { alt: "[Placeholder — empathy map]" },
+            { alt: "[Placeholder — persona or journey map]" },
+          ],
+          caption: "[Placeholder caption]",
+        },
+        {
+          n: "03",
+          title: "Wireframes & prototype",
+          role: "[Placeholder — your role in this phase]",
+          intro: "[Placeholder — how the team went from journey map to screens.]",
+          before: ["[Placeholder]"],
+          did: ["[Placeholder — wireframing]", "[Placeholder — building the interactive prototype]"],
+          found: ["[Placeholder finding]"],
+          takeaway: "[Placeholder — one-sentence takeaway from this phase]",
+          images: [
+            { alt: "[Placeholder — wireframes]" },
+            { alt: "[Placeholder — hi-fi prototype screens]" },
+          ],
+          caption: "[Placeholder caption]",
+        },
+      ],
+      delivery: {
+        intro: "[Placeholder — what the final prototype covers end to end.]",
+        prototypeHref:
+          "https://www.figma.com/proto/IjWeaK8KZZXxvIS2Qh8A82/Enh%C3%B6rningstanternas-snygg-figma?node-id=6-53&scaling=scale-down&content-scaling=fixed&t=PkdXdtJGKdC2eiJ-1&page-id=0%3A1",
+        screens: [
+          { alt: "[Placeholder hi-fi screen]", caption: "[Placeholder caption]" },
+          { alt: "[Placeholder hi-fi screen]", caption: "[Placeholder caption]" },
+          { alt: "[Placeholder hi-fi screen]", caption: "[Placeholder caption]" },
+        ],
+        deliverables: [
+          { label: "Prototype", title: "Clickable in Figma", body: "[Placeholder — scope of the clickable flow]" },
+          { label: "Foundations", title: "Type, colour, components", body: "[Placeholder — the design system basics used]" },
+          { label: "Handoff", title: "Documented decisions", body: "[Placeholder — what was documented for the team/course]" },
+        ],
+      },
+      reflections: [
+        { n: "01", title: "Results", points: ["[Placeholder — what shipped and how it performed]"] },
+        { n: "02", title: "What I'd do differently", points: ["[Placeholder]"] },
+        { n: "03", title: "What I learned", points: ["[Placeholder]"] },
+        { n: "04", title: "Next steps", points: ["[Placeholder]"] },
+      ],
+    },
   },
   {
     id: "wandering-bags",
     title: "Wandering Bags",
     category: "UX PROJECT",
+    year: "2025",
     shortDesc:
       "Group project where we designed a UX concept for a clothing sharing service where garments travel between people in the local community",
     longDesc:
@@ -108,8 +620,8 @@ export const projects: Project[] = [
       "Wireframes",
       "Interactive prototype",
     ],
-    color: "#8B9EA8",
-    accentColor: "#e4eaed",
+    color: "#8B8A6F",
+    accentColor: "#E6E1D5",
     rotation: "-0.6deg",
     featured: false,
     size: "medium",
@@ -118,11 +630,114 @@ export const projects: Project[] = [
       { label: "View prototype", url: "https://www.figma.com/proto/4v4lv65dPbsVzXCG7tLwdw/SLUTPROJEKT-UX-EH-Vandrande-kasse?node-id=274-59&p=f&viewport=1283%2C92%2C0.05&t=x5QYZ6A7kJKgASg2-1&scaling=min-zoom&content-scaling=fixed&starting-point-node-id=274%3A59&show-proto-sidebar=1&page-id=270%3A114" },
       { label: "View process", url: "https://www.figma.com/board/kFk0DvIAUoYUJZQyRIx6tW/FigJam-vandrande-kasse-UX-EH?node-id=0-1&t=wFc7L0nAhoThB8RX-1" },
     ],
+    caseStudy: {
+      eyebrow: "UX case study",
+      tagline:
+        "A group project designing a circular clothing-sharing concept — garments travel between neighbours instead of into landfill.",
+      heroImage: { alt: "Wandering Bags — hi-fi screens from the final Figma prototype" },
+      tintSoft: "#F0EBE3",
+      accentSoft: "#D8D4C6",
+      accentInk: "#76755E",
+      summary: [
+        { label: "The problem", body: "[Placeholder — the specific problem the team identified about clothes-sharing behaviour, confirmed against the research]" },
+        {
+          label: "My decision",
+          body: "I owned the empathy map, problem statement and design goals, then carried them into prototyping — [placeholder: name the specific design call this led to].",
+        },
+        { label: "The outcome", body: "[Placeholder — what testing or delivery showed]" },
+      ],
+      overview: {
+        heading: "A circular alternative to fast fashion, built around trust between neighbours",
+        body: [
+          "Wandering Bags is a concept for garments that travel between people in the same local community instead of being bought new and thrown away. [Placeholder — one more sentence on the specific behaviour or barrier the team designed around.]",
+          "As a team we went through research, empathy mapping, personas, journey mapping, wireframes and an interactive Figma prototype. [Placeholder — how the team divided the work.]",
+        ],
+        contribution:
+          "I was responsible for the empathy map, the problem statement, the design goals and the prototyping — the thread connecting what we learned from people to what we actually built.",
+      },
+      facts: [
+        { label: "My role", value: "UX designer — empathy map, problem statement, design goals, prototyping" },
+        { label: "Team", value: "Group project" },
+        { label: "Timeline", value: "[Placeholder]" },
+        { label: "Context", value: "[Course project]" },
+        { label: "Platform", value: "[Placeholder] — Figma prototype" },
+      ],
+      tools: ["Figma", "FigJam", "User interviews", "Empathy mapping", "Journey mapping", "Wireframing", "Prototyping"],
+      phases: [
+        {
+          n: "01",
+          title: "Research & empathy mapping",
+          role: "Empathy mapper",
+          intro: "[Placeholder — what the team wanted to understand about how people currently pass on clothes.]",
+          before: ["[Placeholder — where things stood before research]"],
+          did: ["Built the empathy map the team's personas were based on.", "[Placeholder — other research activities]"],
+          found: ["[Placeholder finding]", "[Placeholder finding]"],
+          takeaway: "[Placeholder — one-sentence takeaway from this phase]",
+          images: [
+            { alt: "[Placeholder — empathy map]" },
+            { alt: "[Placeholder — interview or research notes]" },
+          ],
+          caption: "[Placeholder caption]",
+        },
+        {
+          n: "02",
+          title: "Problem framing & design goals",
+          role: "Problem framer",
+          intro: "[Placeholder — how the team narrowed research into a problem worth solving.]",
+          before: ["[Placeholder]"],
+          did: ["Wrote the problem statement and design goals the rest of the team designed against.", "[Placeholder — journey mapping]"],
+          found: ["[Placeholder finding]"],
+          takeaway: "[Placeholder — one-sentence takeaway from this phase]",
+          images: [
+            { alt: "[Placeholder — problem statement / design goals artefact]" },
+            { alt: "[Placeholder — journey map]" },
+          ],
+          caption: "[Placeholder caption]",
+        },
+        {
+          n: "03",
+          title: "Wireframes & prototyping",
+          role: "Prototyper",
+          intro: "[Placeholder — how the design goals became a clickable flow.]",
+          before: ["[Placeholder]"],
+          did: ["Built the wireframes and the interactive Figma prototype from the agreed design goals."],
+          found: ["[Placeholder finding]"],
+          takeaway: "[Placeholder — one-sentence takeaway from this phase]",
+          images: [
+            { alt: "[Placeholder — wireframes]" },
+            { alt: "[Placeholder — hi-fi prototype screens]" },
+          ],
+          caption: "[Placeholder caption]",
+        },
+      ],
+      delivery: {
+        intro: "[Placeholder — what the final prototype covers end to end.]",
+        prototypeHref:
+          "https://www.figma.com/proto/4v4lv65dPbsVzXCG7tLwdw/SLUTPROJEKT-UX-EH-Vandrande-kasse?node-id=274-59&p=f&viewport=1283%2C92%2C0.05&t=x5QYZ6A7kJKgASg2-1&scaling=min-zoom&content-scaling=fixed&starting-point-node-id=274%3A59&show-proto-sidebar=1&page-id=270%3A114",
+        screens: [
+          { alt: "[Placeholder hi-fi screen]", caption: "[Placeholder caption]" },
+          { alt: "[Placeholder hi-fi screen]", caption: "[Placeholder caption]" },
+          { alt: "[Placeholder hi-fi screen]", caption: "[Placeholder caption]" },
+        ],
+        deliverables: [
+          { label: "Prototype", title: "Clickable in Figma", body: "[Placeholder — scope of the clickable flow]" },
+          { label: "Foundations", title: "Type, colour, components", body: "[Placeholder — the design system basics used]" },
+          { label: "Handoff", title: "Documented decisions", body: "The problem statement and design goals I wrote, carried through to the final prototype." },
+        ],
+      },
+      reflections: [
+        { n: "01", title: "Results", points: ["[Placeholder — what shipped and how it performed]"] },
+        { n: "02", title: "What I'd do differently", points: ["[Placeholder]"] },
+        { n: "03", title: "What I learned", points: ["[Placeholder]"] },
+        { n: "04", title: "Next steps", points: ["[Placeholder]"] },
+      ],
+    },
   },
   {
     id: "optichain",
     title: "OptiChain — Business Website",
     category: "FRONTEND PROJECT",
+    year: "2024",
     shortDesc:
       "Full website built from scratch during my first LIA internship. Information architecture, Elementor, SEO and Google Analytics.",
     longDesc:
@@ -134,8 +749,8 @@ export const projects: Project[] = [
       "Google Analytics",
       "Responsive Design",
     ],
-    color: "#C9A87C",
-    accentColor: "#f5ede4",
+    color: "#BC9767",
+    accentColor: "#F1E7DA",
     rotation: "1deg",
     featured: true,
     size: "medium",
@@ -146,13 +761,14 @@ export const projects: Project[] = [
     id: "kanban-board",
     title: "Kanban Board",
     category: "FRONTEND PROJECT",
+    year: "2025",
     shortDesc:
       "Drag-and-drop task manager with TypeScript, React, and dnd-kit. Built for intuitive flow and real UX feedback.",
     longDesc:
       "A fully functional Kanban task management app. Drag-and-drop powered by dnd-kit, reusable component architecture in TypeScript, and strong UX attention — visual feedback on every interaction, fully responsive on mobile and desktop.",
     tags: ["TypeScript", "React", "dnd-kit", "Responsive"],
-    color: "#D4897A",
-    accentColor: "#edddd8",
+    color: "#A9705C",
+    accentColor: "#EBDCD6",
     rotation: "-0.8deg",
     featured: true,
     size: "medium",
@@ -166,13 +782,14 @@ export const projects: Project[] = [
     id: "alien-planet",
     title: "Alien Planet",
     category: "FRONTEND PROJECT",
+    year: "2025",
     shortDesc:
       "Group project where we built a fullstack alien database with React, TypeScript and Node.js — I was responsible for the frontend, component design, filtering and AI-generated visuals.",
     longDesc:
       "Alien Planet is a fullstack school project built as a team using an agile workflow — daily standups, sprints, sprint reviews and retrospectives tracked via a GitHub Projects kanban board. The app is a database of alien species and their home planets, with a 1:N relationship between planet and aliens.\n\nI handled the frontend together with a classmate: card components for aliens and planets, client-side filtering with useMemo, and TypeScript interfaces for the full data model. I also took ownership of the visual identity — generating AI images with a dark neon aesthetic in purples, blues and teals that runs throughout the entire app.",
     tags: ["React", "TypeScript", "Node.js", "Fullstack", "Agile", "Git"],
-    color: "#6B5B9E",
-    accentColor: "#e0dbf0",
+    color: "#8E8078",
+    accentColor: "#E8E0DA",
     rotation: "0.8deg",
     featured: false,
     size: "medium",
@@ -187,6 +804,7 @@ export const projects: Project[] = [
     id: "student-portal",
     title: "Student Portal",
     category: "FRONTEND PROJECT",
+    year: "2024",
     shortDesc:
       "Interactive student portal with filtering, search, and API integration built in React and JavaScript.",
     longDesc:
