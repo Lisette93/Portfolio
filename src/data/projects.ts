@@ -67,7 +67,7 @@ export interface CaseStudyDeliverable {
 
 export interface CaseStudyDelivery {
   intro: string;
-  prototypeHref: string;
+  prototypeHref?: string;
   screens: CaseStudyScreen[];
   deliverables: CaseStudyDeliverable[];
 }
@@ -119,9 +119,248 @@ export interface Project {
   imagePad?: string;
   /** presence of this is what creates a /projects/:id case study page */
   caseStudy?: CaseStudy;
+  /** "Current project" pill — presence pins the card above the regular grid */
+  status?: string;
+  /** meta line next to the status pill, e.g. "In UX / prototype stage" */
+  stage?: string;
 }
 
 export const projects: Project[] = [
+  {
+    id: "husplanen",
+    title: "Husplanen",
+    category: "UX PROJECT",
+    year: "2026",
+    status: "Current project",
+    stage: "In UX / prototype stage",
+    shortDesc:
+      "A fullstack app I'm building from scratch — currently in the UX and prototype stage, designing it properly before writing the interface.",
+    longDesc:
+      "Husplanen is my thesis project: an AI-powered home maintenance app for homeowners who are drowning in a mental list of things that need fixing. You dump your tasks in free text, and the app turns that into a prioritized, explained plan. It's the only project on here where I own both the UX and the build, from research through to the code.",
+    tags: ["Figma", "UX Design", "Prototyping", "React", "TypeScript", "Fullstack"],
+    deliverables: [
+      "User research",
+      "User flows",
+      "Wireframes",
+      "Interactive prototype",
+      "Design system",
+    ],
+    color: "#A66B70",
+    accentColor: "#F0DFDD",
+    rotation: "-0.9deg",
+    featured: true,
+    size: "large",
+    links: [],
+    caseStudy: {
+      eyebrow: "UX case study",
+      tagline:
+        "Turning a messy brain-dump of home-maintenance tasks into a plan you can actually act on — still a work in progress.",
+      heroImage: { alt: "Husplanen — current wireframes and prototype screens" },
+      tintSoft: "#F5EAE7",
+      accentSoft: "#E5CECD",
+      accentInk: "#8D5B5F",
+      summary: [
+        {
+          label: "The problem",
+          body: "Homeowners build up a running mental list of things that need doing, but no real system for knowing what matters most or when. Existing tools either want tidy, structured input from day one, or don't help you prioritize at all.",
+        },
+        {
+          label: "My decision",
+          body: "Free-text input has to stay the easy way in — but it can't be the whole product. Every dump goes through a quick AI-suggested confirmation step (room + priority) before it becomes real data. That's the trade-off between frictionless and actually useful, and it matters more here because I also have to build whatever I design.",
+        },
+        {
+          label: "Where it stands",
+          body: "The information architecture and navigation are locked, the design system is built in Figma, and I have working mockups for the core flow and onboarding. Rooms management, the calendar, and a few detail screens are still undesigned, and nothing has been user-tested or coded yet.",
+        },
+      ],
+      overview: {
+        heading: "A home maintenance app that turns a brain-dump into a plan",
+        body: [
+          "Homeowners — especially couples sharing a house — build up a mental backlog of things that need doing, but rarely have a system for it. Husplanen lets you dump everything you're thinking about in free text, then uses AI to sort it into categorized, prioritized tasks with a reason attached, so you know not just what to do but why it matters right now.",
+          "I'm working UX-first: research and interviews before personas, personas before information architecture, IA before any real interface design. The app itself will be a Next.js PWA with a Postgres database, using the Claude API to do the categorizing and prioritizing.",
+        ],
+        contribution:
+          "Solo project — I'm doing the research, the UX, the interface design and the fullstack build myself. Every decision on this page is mine, including the ones I'd defend differently in a team.",
+      },
+      facts: [
+        { label: "My role", value: "UX designer & fullstack developer — solo" },
+        { label: "Team", value: "Solo project" },
+        { label: "Timeline", value: "Ongoing since August 2026, through December 2026" },
+        { label: "Context", value: "Self-initiated — thesis project (Yrkeshögskolan Borås)" },
+        { label: "Platform", value: "Web app (PWA), mobile-first, built for shared household use" },
+        { label: "Status", value: "In UX / prototype stage" },
+      ],
+      tools: [
+        "Figma",
+        "FigJam",
+        "User interviews",
+        "Wireframing",
+        "Prototyping",
+        "React",
+        "TypeScript",
+        "Next.js",
+        "Neon (Postgres)",
+        "Claude API",
+        "Vercel",
+      ],
+      phases: [
+        {
+          n: "01",
+          title: "Problem & discovery",
+          role: "Researcher — planning and running interviews",
+          intro:
+            "Before designing anything, I needed to understand how people actually deal with home maintenance today, and what's missing from the tools already out there.",
+          before: [
+            "No formal research yet — just a hunch that free-text input could lower the barrier to logging tasks.",
+          ],
+          did: [
+            "Interviewed four real homeowners (anonymized as D1–D4 for the thesis)",
+            "Reviewed the main Swedish competitor, Villaägarnas 'Min Villa'",
+          ],
+          found: [
+            "Every participant talked about maintenance as something they manage with a partner, not alone — 'we' language came up across all four interviews.",
+            "No competitor offers free-text dump onboarding or actively distributes responsibility between household members.",
+          ],
+          takeaway:
+            "The real opportunity isn't the free-text input itself — it's reliable relief built on good house data. The dump is just the door in.",
+          images: [
+            { alt: "Interview notes and affinity mapping from the D1–D4 interviews" },
+            { alt: "Competitor review of Villaägarnas 'Min Villa'" },
+          ],
+          caption: "Four real interviews and a competitor review shaped the direction from here.",
+        },
+        {
+          n: "02",
+          title: "Users & framing",
+          role: "UX researcher / designer",
+          intro: "From the interviews, I built personas and a problem statement I could actually design against.",
+          before: ["Started with a synthetic set of three personas, before any real interview data existed."],
+          did: [
+            "Replaced the synthetic personas with two grounded in real interviews: Simon (the improviser) and Karin (the systematic)",
+            "Wrote the problem statement and a set of How-Might-We questions",
+          ],
+          found: [
+            "Shared household use turned out to be the norm across interviews, not an edge case — that changed how central the 'Hushåll' (household) concept needed to be.",
+          ],
+          takeaway:
+            "Simon and Karin need very different things from the same data — Simon needs low friction, Karin needs structure — so the app has to serve both without forcing either into the other's mode.",
+          images: [
+            { alt: "Simon and Karin personas" },
+            { alt: "Problem statement and How-Might-We questions" },
+          ],
+          caption: "Simon and Karin, built from real interviews rather than assumptions.",
+        },
+        {
+          n: "03",
+          title: "Flows & architecture",
+          role: "Information architect / UX designer",
+          intro:
+            "Once I knew who I was designing for, I needed to decide the shape of the app itself — what lives where, and what doesn't make it into the bottom nav.",
+          before: ["Personas and problem statement done, but no structure for the app yet."],
+          did: [
+            "Mapped the overall navigation, the Plan tab in detail, and the Hushåll (household) flow",
+            "Decided on the bottom nav — Hem, Plan (with Åtgärder and Rum sub-tabs), Tidslinje, Kalender — with Hushåll living outside it, behind the avatar/settings, since it's about people and roles rather than daily tasks",
+          ],
+          found: [
+            "Still open: whether the calendar gets its own detailed design in this round, or waits for a later pass.",
+          ],
+          takeaway:
+            "Keeping Hushåll out of the bottom nav was the right call — it's not something people tap into daily the way Plan or Kalender are.",
+          images: [
+            { alt: "Overall navigation IA diagram" },
+            { alt: "Plan-tab and Hushåll flow diagrams" },
+          ],
+          caption: "The navigation structure, locked before any visual design started.",
+        },
+        {
+          n: "04",
+          title: "Wireframes & prototype — in progress",
+          role: "UX/UI designer & frontend developer",
+          intro: "This is where I am right now: building out the actual screens in Figma, one flow at a time.",
+          before: ["IA and navigation locked, but no visual design system yet."],
+          did: [
+            "Built the Figma design system — Fraunces for headings, DM Sans for body text, a sand/terra/green palette, four radius tokens and five spacing steps",
+            "Designed the footer nav component in its four states, the main task flow (dump → confirmation → prioritized plan → task detail), the onboarding flow, and a moodboard screen",
+          ],
+          found: [
+            "Still need to design: the actual 'add task' flow with its AI-suggestion confirmation step, room management (add/edit/delete), the calendar, and a proper task-detail screen.",
+          ],
+          takeaway:
+            "I still haven't decided exactly how much of the calendar needs designing in this round versus later — that's the open question I'm sitting with right now.",
+          images: [
+            { alt: "Current wireframes: dump, quick questions, prioritized plan, task detail" },
+            { alt: "Onboarding and moodboard screens in progress" },
+          ],
+          caption: "Phase 04, live — this is what exists today, not a finished result.",
+        },
+      ],
+      delivery: {
+        intro:
+          "So far this covers the UX groundwork: a locked information architecture, a working design system, and mockups for the main flow and onboarding. The build hasn't started — the plan is to finish designing the remaining screens, then move into prototyping and testing before writing any production code.",
+        screens: [
+          {
+            alt: "The free-text dump screen, where you type everything you're thinking about",
+            caption: "Step 1 — dump everything, no structure required.",
+          },
+          {
+            alt: "The prioritized plan screen, tasks sorted by priority with a 'why' explanation",
+            caption: "Step 3 — a plan with reasons attached, not just a list.",
+          },
+          {
+            alt: "Onboarding screen for selecting which rooms exist in the house",
+            caption: "Setting up the house once, so every later task can be tied to a room.",
+          },
+        ],
+        deliverables: [
+          {
+            label: "Prototype",
+            title: "Clickable in Figma",
+            body: "Covers the main dump-to-plan flow and onboarding so far; the rest of the flows are still on paper.",
+          },
+          {
+            label: "Foundations",
+            title: "Type, colour, components",
+            body: "Fraunces + DM Sans, a warm sand/terra/green palette, and a small token system for radius and spacing — built to hold up once the whole app exists.",
+          },
+          {
+            label: "Build",
+            title: "Fullstack implementation",
+            body: "Next.js PWA with a Neon Postgres database and the Claude API handling categorization and prioritization, deployed on Vercel. Nothing built yet — this is the plan for once the design is far enough along.",
+          },
+        ],
+      },
+      reflections: [
+        {
+          n: "01",
+          title: "Where it stands",
+          points: [
+            "The problem, personas and information architecture are locked. The design system exists and I have working mockups for the core flow and onboarding, but several screens — adding a task, managing rooms, the calendar — are still undesigned.",
+          ],
+        },
+        {
+          n: "02",
+          title: "What's been hardest",
+          points: [
+            "Keeping the free-text dump from becoming the whole story. It's the easiest part to get excited about, but the real value is the structured house data underneath it — I have to keep reminding myself of that when deciding what to design next.",
+          ],
+        },
+        {
+          n: "03",
+          title: "What I've learned so far",
+          points: [
+            "How much shared household use changes basic navigation decisions — where 'Hushåll' lives in the nav isn't a small detail when every interviewee was managing their house with a partner.",
+          ],
+        },
+        {
+          n: "04",
+          title: "Next steps",
+          points: [
+            "Design the remaining screens — starting with the 'add task' flow and its confirmation step — then move into prototyping and Validering (user testing) before touching any code.",
+          ],
+        },
+      ],
+    },
+  },
   {
     id: "health-app",
     title: "Health App",

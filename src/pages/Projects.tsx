@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import PageTransition from '../components/PageTransition'
 import WaveDivider from '../components/WaveDivider'
 import FadeIn from '../components/FadeIn'
+import ImageSlot from '../components/ImageSlot'
 import { projects, type Project } from '../data/projects'
 
 const INK = '#35302C'
@@ -42,8 +43,8 @@ function ProjectCard({ project, index, num }: { project: Project; index: number;
               <img src={project.image} alt={project.title} className="w-full h-full object-contain object-bottom" />
             </div>
           ) : (
-            <div className="absolute inset-0 flex items-center justify-center">
-              <span className="font-body text-xs italic" style={{ color: BODY }}>{project.title} — screenshot</span>
+            <div className="absolute inset-0 p-6 sm:p-8">
+              <ImageSlot image={{ alt: `${project.title} — screenshot` }} className="rounded-2xl" />
             </div>
           )}
         </div>
@@ -126,10 +127,100 @@ function ProjectCard({ project, index, num }: { project: Project; index: number;
   )
 }
 
+function PinnedProjectCard({ project }: { project: Project }) {
+  const primaryLink = project.links[0]
+
+  return (
+    <FadeIn>
+      <article
+        className="rounded-[4px_4px_26px_26px] overflow-hidden border shadow-[0_20px_44px_-38px_rgba(88,63,48,0.5)]"
+        style={{ background: '#FEFCFA', borderColor: 'rgba(53,48,44,0.07)' }}
+      >
+        <div className="h-1 w-full" style={{ background: project.color }} />
+
+        <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,420px)_1fr]">
+          <div className="relative h-56 lg:h-auto p-6 lg:p-8" style={{ background: project.accentColor }}>
+            {project.image ? (
+              <img src={project.image} alt={project.title} className="w-full h-full object-contain" />
+            ) : (
+              <ImageSlot image={{ alt: `${project.title} — hi-fi screens or prototype` }} className="rounded-2xl" />
+            )}
+          </div>
+
+          <div className="p-7 sm:p-10 lg:p-12">
+            <div className="flex items-center gap-3 flex-wrap">
+              {project.status && (
+                <span
+                  className="font-body text-[11px] font-medium uppercase tracking-[0.16em] px-4 py-2 rounded-full text-white whitespace-nowrap"
+                  style={{ background: project.color }}
+                >
+                  {project.status}
+                </span>
+              )}
+              {project.stage && (
+                <span className="font-body text-[11.5px] uppercase tracking-[0.16em]" style={{ color: LABEL }}>
+                  {project.stage}
+                </span>
+              )}
+            </div>
+
+            <h2 className="font-display font-normal text-4xl sm:text-5xl leading-tight tracking-[-0.01em] mt-4" style={{ color: INK }}>
+              {project.title}
+            </h2>
+            <p className="font-body font-light text-base leading-relaxed mt-4 max-w-xl" style={{ color: BODY, textWrap: 'pretty' }}>
+              {project.shortDesc}
+            </p>
+
+            <div className="flex flex-wrap gap-2 mt-6">
+              {project.tags.map((tag) => (
+                <span
+                  key={tag}
+                  className="font-body text-[13px] font-light px-3.5 py-1.5 rounded-full border whitespace-nowrap"
+                  style={{ color: '#7C6B5F', borderColor: 'rgba(53,48,44,0.12)' }}
+                >
+                  {tag}
+                </span>
+              ))}
+            </div>
+
+            <div className="h-px my-6" style={{ background: 'rgba(53,48,44,0.08)' }} />
+
+            <div className="flex flex-wrap gap-2.5">
+              <Link
+                to={`/projects/${project.id}`}
+                className="font-body text-sm font-medium px-5 py-3 rounded-full text-white whitespace-nowrap transition-colors"
+                style={{ background: project.color }}
+              >
+                Read the case study →
+              </Link>
+              {primaryLink && (
+                <a
+                  href={primaryLink.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-body text-sm font-normal px-5 py-3 rounded-full whitespace-nowrap border transition-colors"
+                  style={{ color: '#6B5A4E', borderColor: 'rgba(53,48,44,0.16)' }}
+                >
+                  {primaryLink.label} ↗
+                </a>
+              )}
+            </div>
+          </div>
+        </div>
+      </article>
+    </FadeIn>
+  )
+}
+
 export default function Projects() {
   const [filter, setFilter] = useState<Filter>('All')
 
-  const filtered = filter === 'All' ? projects : projects.filter((p) => groupOf(p) === filter)
+  const gridPool = projects.filter((p) => !p.status)
+  const pinned = projects.filter((p) => p.status)
+
+  const filtered = filter === 'All' ? gridPool : gridPool.filter((p) => groupOf(p) === filter)
+  const visiblePinned = filter === 'All' ? pinned : pinned.filter((p) => groupOf(p) === filter)
+  const totalShown = filtered.length + visiblePinned.length
 
   return (
     <PageTransition>
@@ -148,7 +239,7 @@ export default function Projects() {
             </FadeIn>
             <FadeIn delay={0.1} className="lg:pb-2">
               <div className="font-display text-5xl leading-none" style={{ color: '#DCC3B3' }}>
-                {String(filtered.length).padStart(2, '0')}
+                {String(totalShown).padStart(2, '0')}
               </div>
               <div className="font-body text-xs uppercase tracking-[0.16em] mt-2" style={{ color: '#A2856F' }}>
                 projects shown
@@ -180,6 +271,17 @@ export default function Projects() {
         </div>
       </section>
 
+      {/* ── PINNED / CURRENT PROJECT ── */}
+      {visiblePinned.length > 0 && (
+        <section className="w-full pt-14 px-6">
+          <div className="max-w-[1240px] mx-auto grid gap-8">
+            {visiblePinned.map((project) => (
+              <PinnedProjectCard key={project.id} project={project} />
+            ))}
+          </div>
+        </section>
+      )}
+
       {/* ── GRID ── */}
       <section className="w-full pt-14 pb-24 px-6">
         <div className="max-w-[1240px] mx-auto">
@@ -191,7 +293,7 @@ export default function Projects() {
             </AnimatePresence>
           </motion.div>
 
-          {filtered.length === 0 && (
+          {totalShown === 0 && (
             <div className="text-center py-20">
               <p className="font-accent text-xl" style={{ color: '#A96C52' }}>nothing here yet ✦</p>
             </div>

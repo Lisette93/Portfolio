@@ -2,12 +2,8 @@ import { useEffect, useRef, useState } from "react";
 import { useParams, Navigate, Link } from "react-router-dom";
 import PageTransition from "../components/PageTransition";
 import FadeIn from "../components/FadeIn";
-import {
-  projects,
-  type Project,
-  type CaseStudy,
-  type CaseStudyImage,
-} from "../data/projects";
+import ImageSlot from "../components/ImageSlot";
+import { projects, type Project, type CaseStudy } from "../data/projects";
 
 const INK = "#35302C";
 const BODY = "#5F564F";
@@ -18,35 +14,6 @@ const LABEL = "#A2856F";
 const HAIRLINE = "rgba(53,48,44,0.08)";
 const HAIRLINE_STRONG = "rgba(53,48,44,0.11)";
 const CARD = "#FEFCFA";
-
-/* empty image placeholder — swap `image.src` for a real asset later */
-function ImageSlot({
-  image,
-  className = "",
-}: {
-  image: CaseStudyImage;
-  className?: string;
-}) {
-  if (image.src) {
-    return (
-      <img
-        src={image.src}
-        alt={image.alt}
-        className={`w-full h-full object-cover ${className}`}
-      />
-    );
-  }
-  return (
-    <div
-      className={`w-full h-full flex items-center justify-center text-center px-5 border border-dashed rounded-[inherit] ${className}`}
-      style={{ borderColor: "rgba(53,48,44,0.18)", background: "rgba(255,255,255,0.4)" }}
-    >
-      <span className="font-body text-xs italic" style={{ color: SECONDARY }}>
-        {image.alt}
-      </span>
-    </div>
-  );
-}
 
 function Star({ className = "", style }: { className?: string; style?: React.CSSProperties }) {
   return (
@@ -484,15 +451,17 @@ function CaseStudyContent({
             <h2 className="font-display font-normal text-4xl lg:text-[52px] leading-tight mt-2" style={{ color: INK }}>Delivery &amp; prototype</h2>
             <p className="font-body font-light text-base lg:text-lg leading-relaxed mt-5" style={{ color: BODY, textWrap: "pretty" }}>{cs.delivery.intro}</p>
           </FadeIn>
-          <a
-            href={cs.delivery.prototypeHref}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="font-body text-sm font-medium px-7 py-3.5 rounded-full text-white whitespace-nowrap"
-            style={{ background: accent }}
-          >
-            Open the prototype ↗
-          </a>
+          {cs.delivery.prototypeHref && (
+            <a
+              href={cs.delivery.prototypeHref}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-body text-sm font-medium px-7 py-3.5 rounded-full text-white whitespace-nowrap"
+              style={{ background: accent }}
+            >
+              Open the prototype ↗
+            </a>
+          )}
         </div>
 
         <div className="mt-11 rounded-[28px] sm:rounded-[34px] p-5 sm:p-8" style={{ background: tint }}>
