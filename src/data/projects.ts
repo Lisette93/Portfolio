@@ -1,3 +1,4 @@
+import husplanenMockupImg from "../assets/husplanen-mockup.png";
 import optichaingImg from "../assets/optichain.png";
 import kanbanImg from "../assets/kanban.png";
 import studentPortalImg from "../assets/StudentPortal.png";
@@ -11,6 +12,75 @@ export interface CaseStudyImage {
   alt: string;
 }
 
+export interface CaseStudyPanelHeader {
+  eyebrow: string;
+  title: string;
+  meta?: string[];
+}
+
+/** research artefacts rendered as real page content instead of a screenshot — one type per deliverable shape */
+export type CaseStudyPanel =
+  | {
+      kind: "competitor";
+      header: CaseStudyPanelHeader;
+      promiseLabel: string;
+      promise: { title: string; body: string };
+      features: { title: string; body: string }[];
+      stats: { value: string; label: string }[];
+      notesLabel: string;
+      notes: string[];
+      conclusionLabel: string;
+      /** supports **bold** spans */
+      conclusion: string;
+      footnote?: string;
+    }
+  | {
+      kind: "affinity-map";
+      header: CaseStudyPanelHeader;
+      columns: {
+        heading: string;
+        highlight?: boolean;
+        items: ({ type: "cluster"; tag: string; title: string } | { type: "quote"; text: string })[];
+      }[];
+      insightLabel: string;
+      insight: string;
+    }
+  | {
+      kind: "personas";
+      header: CaseStudyPanelHeader;
+      personas: {
+        initial: string;
+        name: string;
+        subtitle: string;
+        description: string;
+        quote: string;
+        behavior: string;
+        frustrations: string[];
+        wants: string[];
+        clusterTag: string;
+        swatch: string;
+        swatchInk: string;
+      }[];
+      comparisonLabel: string;
+      comparisonColumns: string[];
+      comparisonRows: { name: string; values: string[] }[];
+      closing: string;
+    }
+  | {
+      kind: "problem-statement";
+      header: CaseStudyPanelHeader;
+      /** supports **bold** spans */
+      statement: string;
+      failuresLabel: string;
+      failures: string[];
+      validatedLabel: string;
+      validated: string[];
+      validatedNote?: string;
+      hmwLabel: string;
+      hmwNote?: string;
+      hmw: { n: string; question: string }[];
+    };
+
 export interface CaseStudyPhase {
   n: string;
   title: string;
@@ -21,7 +91,9 @@ export interface CaseStudyPhase {
   did: string[];
   found: string[];
   takeaway: string;
-  images: [CaseStudyImage, CaseStudyImage];
+  /** exactly one of images / panels — panels renders research artefacts as real content instead of screenshots */
+  images?: [CaseStudyImage, CaseStudyImage];
+  panels?: [CaseStudyPanel, CaseStudyPanel];
   caption: string;
 }
 
@@ -134,7 +206,7 @@ export const projects: Project[] = [
     status: "Current project",
     stage: "In UX / prototype stage",
     shortDesc:
-      "A fullstack app I'm building from scratch — currently in the UX and prototype stage, designing it properly before writing the interface.",
+      "A fullstack app I'm building from scratch — UX and design mostly locked, and I'm building it out screen by screen right now.",
     longDesc:
       "Husplanen is my thesis project: an AI-powered home maintenance app for homeowners who are drowning in a mental list of things that need fixing. You dump your tasks in free text, and the app turns that into a prioritized, explained plan. It's the only project on here where I own both the UX and the build, from research through to the code.",
     tags: ["Figma", "UX Design", "Prototyping", "React", "TypeScript", "Fullstack"],
@@ -150,12 +222,13 @@ export const projects: Project[] = [
     rotation: "-0.9deg",
     featured: true,
     size: "large",
+    image: husplanenMockupImg,
     links: [],
     caseStudy: {
       eyebrow: "UX case study",
       tagline:
         "Turning a messy brain-dump of home-maintenance tasks into a plan you can actually act on — still a work in progress.",
-      heroImage: { alt: "Husplanen — current wireframes and prototype screens" },
+      heroImage: { src: husplanenMockupImg, alt: "Husplanen — current wireframes and prototype screens" },
       tintSoft: "#F5EAE7",
       accentSoft: "#E5CECD",
       accentInk: "#8D5B5F",
@@ -165,19 +238,19 @@ export const projects: Project[] = [
           body: "Homeowners build up a running mental list of things that need doing, but no real system for knowing what matters most or when. Existing tools either want tidy, structured input from day one, or don't help you prioritize at all.",
         },
         {
-          label: "My decision",
-          body: "Free-text input has to stay the easy way in — but it can't be the whole product. Every dump goes through a quick AI-suggested confirmation step (room + priority) before it becomes real data. That's the trade-off between frictionless and actually useful, and it matters more here because I also have to build whatever I design.",
+          label: "My approach",
+          body: "Husplanen takes whatever a homeowner throws at it — in free text, unsorted — and turns it into a plan: prioritized, sized by effort, with reminders for the stuff that repeats. Free-text input has to stay the easy way in, but it can't be the whole product, so Husplanen suggests a full plan from the dump and you confirm it in bulk (\"Does this look right?\"), with the option to go step-by-step if you'd rather. That trade-off between frictionless and actually useful matters more here because I'm also the one building what I design.",
         },
         {
           label: "Where it stands",
-          body: "The information architecture and navigation are locked, the design system is built in Figma, and I have working mockups for the core flow and onboarding. Rooms management, the calendar, and a few detail screens are still undesigned, and nothing has been user-tested or coded yet.",
+          body: "The information architecture and navigation are locked, the design system is built in Figma, and the core screens — home, tasks, rooms, timeline, onboarding — are designed. The build is underway alongside the design work. Kalender's level of detail is still an open question, and nothing has been user-tested yet.",
         },
       ],
       overview: {
         heading: "A home maintenance app that turns a brain-dump into a plan",
         body: [
           "Homeowners — especially couples sharing a house — build up a mental backlog of things that need doing, but rarely have a system for it. Husplanen lets you dump everything you're thinking about in free text, then uses AI to sort it into categorized, prioritized tasks with a reason attached, so you know not just what to do but why it matters right now.",
-          "I'm working UX-first: research and interviews before personas, personas before information architecture, IA before any real interface design. The app itself will be a Next.js PWA with a Postgres database, using the Claude API to do the categorizing and prioritizing.",
+          "I'm working UX-first: research and interviews before personas, personas before information architecture, IA before any real interface design. I'm building it as a Next.js PWA with a Postgres database, letting the Claude API handle the categorizing and prioritizing.",
         ],
         contribution:
           "Solo project — I'm doing the research, the UX, the interface design and the fullstack build myself. Every decision on this page is mine, including the ones I'd defend differently in a team.",
@@ -223,9 +296,94 @@ export const projects: Project[] = [
           ],
           takeaway:
             "The real opportunity isn't the free-text input itself — it's reliable relief built on good house data. The dump is just the door in.",
-          images: [
-            { alt: "Interview notes and affinity mapping from the D1–D4 interviews" },
-            { alt: "Competitor review of Villaägarnas 'Min Villa'" },
+          panels: [
+            {
+              kind: "affinity-map",
+              header: {
+                eyebrow: "Discovery · Affinity mapping",
+                title: "Four interviews, twelve clusters",
+                meta: ["D1–D4 · anonymized", "25 August 2026"],
+              },
+              columns: [
+                {
+                  heading: "The burden of remembering",
+                  items: [
+                    { type: "cluster", tag: "Cluster 1", title: "Mental load" },
+                    { type: "cluster", tag: "Cluster 11", title: "No overview of the whole house" },
+                    { type: "quote", text: "Hard to get a good overview — easy to just keep writing new lists." },
+                    { type: "quote", text: "It turns into a long list. No deadline." },
+                  ],
+                },
+                {
+                  heading: "What stops you",
+                  items: [
+                    { type: "cluster", tag: "Cluster 2", title: "Cost is invisible before the decision" },
+                    { type: "cluster", tag: "Cluster 6", title: "Effort, time and tedium" },
+                    { type: "cluster", tag: "Cluster 12", title: "Projects don't break down into steps" },
+                    { type: "quote", text: "Now I have six hours — what can I actually get done?" },
+                  ],
+                },
+                {
+                  heading: "What would drive you",
+                  items: [
+                    { type: "cluster", tag: "Cluster 4", title: "Pattern recognition: 'every X years'" },
+                    { type: "cluster", tag: "Cluster 13", title: "Motivation sequencing" },
+                    { type: "cluster", tag: "Cluster 14", title: "Calendar summarizing" },
+                    { type: "cluster", tag: "Cluster 15", title: "Prioritization criteria" },
+                    { type: "quote", text: "I don't get reminded early enough — I've already missed the chance to plan." },
+                  ],
+                },
+                {
+                  heading: "The household",
+                  highlight: true,
+                  items: [
+                    { type: "cluster", tag: "Cluster 5", title: "All four spoke in 'we'" },
+                    { type: "cluster", tag: "Cluster 3", title: "Resistance from the already-organized partner" },
+                    { type: "cluster", tag: "Cluster 10", title: "Photo-based input" },
+                    { type: "quote", text: "The binder system 'works okay' — but isn't searchable. — D4" },
+                  ],
+                },
+              ],
+              insightLabel: "What the clusters say",
+              insight:
+                "It's not the input that's the problem. It's cost, capacity, pattern, prioritization, searchable history and shared responsibility — six things a to-do list doesn't do.",
+            },
+            {
+              kind: "competitor",
+              header: {
+                eyebrow: "Discovery · Competitor analysis",
+                title: "Villaägarna · Min Villa",
+                meta: ["Reviewed: public product area", "minvilla.villaagarna.se"],
+              },
+              promiseLabel: "What the service promises",
+              promise: {
+                title: "A personal maintenance plan at signup",
+                body: "The account builds the plan for you. Then it guides you through inspecting the house, step by step, and helps out when something needs fixing.",
+              },
+              features: [
+                { title: "Track & fix", body: "Descriptions of inspection and maintenance." },
+                { title: "Document", body: "Status under control, documented in the service." },
+                { title: "Save money", body: "Membership discounts and offers." },
+                { title: "Talk to experts", body: "Advice on construction and legal questions." },
+              ],
+              stats: [
+                { value: "468 kr", label: "membership / year" },
+                { value: "30 442", label: "maintenance plans created" },
+                { value: "14 days", label: "free trial account" },
+              ],
+              notesLabel: "My notes",
+              notes: [
+                "The plan is made for you — good proactivity, but it starts from the house, not from what you can actually handle right now. No filtering by time or effort.",
+                "No cost indication before you commit — \"save money\" means discounts, not a price picture for a task.",
+                "One account = one homeowner. The household as a unit doesn't show up anywhere in the offering — no way to split tasks between partners.",
+                "Documentation exists — but the promise is to store it, not to find it again. Searchability is still unsolved.",
+              ],
+              conclusionLabel: "Takeaway",
+              conclusion:
+                "Min Villa covers **what needs doing** to the house. The gap is **who** does it, **when** you actually have the energy, **what it costs** — and finding your way back to it afterward.",
+              footnote:
+                "To verify in the demo account: reminder lead time, whether the plan is fully editable, and how documents are searched back.",
+            },
           ],
           caption: "Four real interviews and a competitor review shaped the direction from here.",
         },
@@ -236,19 +394,127 @@ export const projects: Project[] = [
           intro: "From the interviews, I built personas and a problem statement I could actually design against.",
           before: ["Started with a synthetic set of three personas, before any real interview data existed."],
           did: [
-            "Replaced the synthetic personas with two grounded in real interviews: Simon (the improviser) and Karin (the systematic)",
+            "Replaced the synthetic personas with two grounded in real interviews: Karl (the improviser) and Sara (the systematic)",
             "Wrote the problem statement and a set of How-Might-We questions",
           ],
           found: [
             "Shared household use turned out to be the norm across interviews, not an edge case — that changed how central the 'Hushåll' (household) concept needed to be.",
           ],
           takeaway:
-            "Simon and Karin need very different things from the same data — Simon needs low friction, Karin needs structure — so the app has to serve both without forcing either into the other's mode.",
-          images: [
-            { alt: "Simon and Karin personas" },
-            { alt: "Problem statement and How-Might-We questions" },
+            "Karl and Sara need very different things from the same data — Karl needs low friction, Sara needs structure — so the app has to serve both without forcing either into the other's mode.",
+          panels: [
+            {
+              kind: "personas",
+              header: {
+                eyebrow: "Definition · Personas",
+                title: "Karl and Sara",
+                meta: ["Grounded in D1–D4 · replaces the synthetic personas", "Finalized 25 August 2026"],
+              },
+              personas: [
+                {
+                  initial: "K",
+                  name: "Karl",
+                  subtitle: "The improviser · D1, D2",
+                  description:
+                    "Shares a household with a partner. No established system — maintenance is handled verbally or on loose notes. The house is both a joy and overwhelming.",
+                  quote: "I have basically no energy to think strategically about what matters most.",
+                  behavior:
+                    "Jumps between things instead of focusing. Simplifies projects on the fly to get them done — uses what's already at home.",
+                  frustrations: [
+                    "Doesn't know what things cost before deciding",
+                    "No help breaking a big project into steps",
+                    "No clear starting point; everything feels equally big",
+                  ],
+                  wants: [
+                    "Filtering by time and effort: \"what can I fit into six hours?\"",
+                    "Rough cost ranges before deciding",
+                    "Projects split into steps, not whole tasks",
+                    "Easy to get started — not a new system to maintain",
+                  ],
+                  clusterTag: "Clusters 1, 2, 6, 10, 12",
+                  swatch: "#F5EAE7",
+                  swatchInk: "#8D5B5F",
+                },
+                {
+                  initial: "S",
+                  name: "Sara",
+                  subtitle: "The systematic · D3, D4",
+                  description:
+                    "Shares a household with a partner. Already has a spreadsheet and calendar, reads up on maintenance intervals herself. The system still isn't enough — the list gets long and passive.",
+                  quote:
+                    "An invisible, super-competent caretaker who makes sure the house is always in perfect shape — before problems even appear.",
+                  behavior:
+                    "Prioritizes by urgency, risk of damage to the house, and what everyday life demands. Still puts off boring tasks.",
+                  frustrations: [
+                    "Knows what needs doing, but nothing drives it forward",
+                    "Reminders come too late to book a contractor",
+                    "\"Cleaning up is tedious\" — gets postponed despite good structure",
+                  ],
+                  wants: [
+                    "A forward-driving mechanism, not just a list",
+                    "Pattern recognition: \"this usually needs doing every X years\"",
+                    "Sequencing: an easy task before a hard one",
+                    "Proactivity — not having to track intervals herself",
+                  ],
+                  clusterTag: "Clusters 3, 4, 6, 11, 13, 14, 15",
+                  swatch: "#E8ECE4",
+                  swatchInk: "#5C7A63",
+                },
+              ],
+              comparisonLabel: "What sets them apart",
+              comparisonColumns: ["Tool today", "Core blocker", "Prioritizes by", "Wants help with"],
+              comparisonRows: [
+                {
+                  name: "Karl",
+                  values: ["None / verbal / loose notes", "Doesn't know where to start", "Effort, time, cost", "Getting started, breaking things down"],
+                },
+                {
+                  name: "Sara",
+                  values: ["Spreadsheet / calendar", "Structure exists, follow-through doesn't", "Urgency, damage risk, tedium", "Being reminded in time, seeing patterns"],
+                },
+              ],
+              closing:
+                "Same core problem, different tool maturity — a nuance for design, not two separate audiences. Both share a household with a partner.",
+            },
+            {
+              kind: "problem-statement",
+              header: {
+                eyebrow: "Definition · Problem statement",
+                title: "The locked problem",
+                meta: ["Locked 25 August 2026", "D1–D4 + three synthetic interviews"],
+              },
+              statement:
+                "Homeowners carry the responsibility alone to **remember, judge, prioritize and plan** home maintenance. Information about the house — receipts, warranties, work done, dates — is scattered across folders and email, and becomes unreachable exactly when it's needed most.",
+              failuresLabel: "How today's tools fall short",
+              failures: [
+                "No real overview across multiple tasks at once",
+                "No forward-looking warning in good time — not for big projects, and not for routines like waste collection",
+                "No help breaking a project into manageable steps",
+              ],
+              validatedLabel: "Validated in the interviews",
+              validated: [
+                "Reduced mental load",
+                "Overview across multiple tasks",
+                "Reminders with good lead time",
+                "Breaking things into steps",
+                "Shared household responsibility (4/4)",
+                "Searchable maintenance history",
+              ],
+              validatedNote:
+                "Not confirmed: active assignment of responsibility — the mechanism was barely tested. Built as designed, but with extra attentiveness.",
+              hmwLabel: "How might we",
+              hmwNote: "one question per validated need",
+              hmw: [
+                { n: "01", question: "How might we show roughly what a task will cost before someone decides?" },
+                { n: "02", question: "How might we let the house suggest its own maintenance instead of requiring someone to remember the intervals?" },
+                { n: "03", question: "How might we match tasks to the time and energy a user actually has right now?" },
+                { n: "04", question: "How might we remind early enough that it's still possible to plan — not just on the day?" },
+                { n: "05", question: "How might we make the house's history searchable years later — by room, task and year?" },
+                { n: "06", question: "How might we split responsibility across a household without anyone having to nag the other?" },
+              ],
+            },
           ],
-          caption: "Simon and Karin, built from real interviews rather than assumptions.",
+          caption: "Karl and Sara, built from real interviews rather than assumptions.",
         },
         {
           n: "03",
@@ -266,10 +532,6 @@ export const projects: Project[] = [
           ],
           takeaway:
             "Keeping Hushåll out of the bottom nav was the right call — it's not something people tap into daily the way Plan or Kalender are.",
-          images: [
-            { alt: "Overall navigation IA diagram" },
-            { alt: "Plan-tab and Hushåll flow diagrams" },
-          ],
           caption: "The navigation structure, locked before any visual design started.",
         },
         {
@@ -280,42 +542,86 @@ export const projects: Project[] = [
           before: ["IA and navigation locked, but no visual design system yet."],
           did: [
             "Built the Figma design system — Fraunces for headings, DM Sans for body text, a sand/terra/green palette, four radius tokens and five spacing steps",
-            "Designed the footer nav component in its four states, the main task flow (dump → confirmation → prioritized plan → task detail), the onboarding flow, and a moodboard screen",
+            "Designed the footer nav component in its four states, the onboarding flow, the Hem (home) screen, Plan with its Åtgärder and Rum sub-tabs, the new-room flow, an individual task/åtgärd detail screen, and Tidslinje including adding a new entry",
+            "Started building the app alongside the design work — several of these screens already exist in code, not just Figma",
           ],
           found: [
-            "Still need to design: the actual 'add task' flow with its AI-suggestion confirmation step, room management (add/edit/delete), the calendar, and a proper task-detail screen.",
+            "Building in code while I'm still designing keeps surfacing real questions early — spacing, edge cases, states — stuff a Figma-only process would let slide.",
           ],
           takeaway:
-            "I still haven't decided exactly how much of the calendar needs designing in this round versus later — that's the open question I'm sitting with right now.",
+            "Designing and building in parallel keeps me honest — a screen that looks done in Figma still has to hold up once it's real code.",
           images: [
-            { alt: "Current wireframes: dump, quick questions, prioritized plan, task detail" },
-            { alt: "Onboarding and moodboard screens in progress" },
+            { alt: "Onboarding flow — step 1", src: "/images/husplanen/onboarding.png" },
+            { alt: "Hem (home) screen", src: "/images/husplanen/home.png" },
           ],
           caption: "Phase 04, live — this is what exists today, not a finished result.",
         },
       ],
       delivery: {
         intro:
-          "So far this covers the UX groundwork: a locked information architecture, a working design system, and mockups for the main flow and onboarding. The build hasn't started — the plan is to finish designing the remaining screens, then move into prototyping and testing before writing any production code.",
+          "This covers the UX groundwork: a locked information architecture, a working design system, and designed screens for onboarding, the home screen, tasks, rooms and the timeline. The build is running alongside the design work rather than waiting for it to finish.",
         screens: [
           {
-            alt: "The free-text dump screen, where you type everything you're thinking about",
-            caption: "Step 1 — dump everything, no structure required.",
+            alt: "Onboarding flow — step 1",
+            src: "/images/husplanen/onboarding.png",
+            caption: "Onboarding — step 1.",
           },
           {
-            alt: "The prioritized plan screen, tasks sorted by priority with a 'why' explanation",
-            caption: "Step 3 — a plan with reasons attached, not just a list.",
+            alt: "Onboarding flow — step 2",
+            src: "/images/husplanen/onboarding2.png",
+            caption: "Onboarding — step 2.",
           },
           {
-            alt: "Onboarding screen for selecting which rooms exist in the house",
-            caption: "Setting up the house once, so every later task can be tied to a room.",
+            alt: "Onboarding flow — step 3",
+            src: "/images/husplanen/onboarding3.png",
+            caption: "Onboarding — step 3.",
+          },
+          {
+            alt: "Free-text dump screen, part of onboarding",
+            src: "/images/husplanen/dump.png",
+            caption: "Dump everything, no structure required.",
+          },
+          {
+            alt: "Hem (home) screen",
+            src: "/images/husplanen/home.png",
+            caption: "Home — what needs your attention right now.",
+          },
+          {
+            alt: "Plan — Åtgärder sub-tab, tasks sorted by priority",
+            src: "/images/husplanen/plan-atgarder.png",
+            caption: "A plan with reasons attached, not just a list.",
+          },
+          {
+            alt: "Plan — Rum sub-tab",
+            src: "/images/husplanen/plan-rum.png",
+            caption: "Tasks grouped by room.",
+          },
+          {
+            alt: "New room flow",
+            src: "/images/husplanen/nytt-rum.png",
+            caption: "Adding a new room to the house.",
+          },
+          {
+            alt: "Task/åtgärd detail screen",
+            src: "/images/husplanen/atgards-detalj.png",
+            caption: "One task, with the reasoning behind it.",
+          },
+          {
+            alt: "Tidslinje, the house's history over time",
+            src: "/images/husplanen/tidslinje.png",
+            caption: "Tidslinje — the house's history in one searchable place.",
+          },
+          {
+            alt: "Tidslinje — adding a new entry",
+            src: "/images/husplanen/tidslinje-add.png",
+            caption: "Logging something that's already been done.",
           },
         ],
         deliverables: [
           {
             label: "Prototype",
             title: "Clickable in Figma",
-            body: "Covers the main dump-to-plan flow and onboarding so far; the rest of the flows are still on paper.",
+            body: "Covers onboarding, home, the full Plan flow (Åtgärder + Rum), task detail and Tidslinje.",
           },
           {
             label: "Foundations",
@@ -325,7 +631,7 @@ export const projects: Project[] = [
           {
             label: "Build",
             title: "Fullstack implementation",
-            body: "Next.js PWA with a Neon Postgres database and the Claude API handling categorization and prioritization, deployed on Vercel. Nothing built yet — this is the plan for once the design is far enough along.",
+            body: "Next.js PWA with a Neon Postgres database and the Claude API handling categorization and prioritization, deployed on Vercel. Several screens are already implemented in code alongside the ongoing design work.",
           },
         ],
       },
@@ -334,7 +640,7 @@ export const projects: Project[] = [
           n: "01",
           title: "Where it stands",
           points: [
-            "The problem, personas and information architecture are locked. The design system exists and I have working mockups for the core flow and onboarding, but several screens — adding a task, managing rooms, the calendar — are still undesigned.",
+            "IA, personas and the design system are locked, and several screens already exist in code as well as Figma. Nothing has been in front of a real user yet — that's the gap I'm most aware of right now.",
           ],
         },
         {
@@ -348,14 +654,14 @@ export const projects: Project[] = [
           n: "03",
           title: "What I've learned so far",
           points: [
-            "How much shared household use changes basic navigation decisions — where 'Hushåll' lives in the nav isn't a small detail when every interviewee was managing their house with a partner.",
+            "Villaägarnas 'Min Villa' plans from the house, not from the person — proactive, but it assumes energy and time you may not actually have right now. That gap is what free-text-plus-prioritization is really solving, more than the input method itself.",
           ],
         },
         {
           n: "04",
           title: "Next steps",
           points: [
-            "Design the remaining screens — starting with the 'add task' flow and its confirmation step — then move into prototyping and Validering (user testing) before touching any code.",
+            "Decide how much Kalender needs in this round, keep building out the screens that are already designed, and move into Validering (user testing) once there's enough built to test.",
           ],
         },
       ],

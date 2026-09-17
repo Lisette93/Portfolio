@@ -139,7 +139,7 @@ function PinnedProjectCard({ project }: { project: Project }) {
         <div className="h-1 w-full" style={{ background: project.color }} />
 
         <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,420px)_1fr]">
-          <div className="relative h-56 lg:h-auto p-6 lg:p-8" style={{ background: project.accentColor }}>
+          <div className="relative h-56 lg:h-auto p-2 lg:p-3" style={{ background: project.accentColor }}>
             {project.image ? (
               <img src={project.image} alt={project.title} className="w-full h-full object-contain" />
             ) : (
