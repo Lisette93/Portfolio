@@ -2,7 +2,7 @@ import husplanenMockupImg from "../assets/husplanen-mockup.png";
 import optichaingImg from "../assets/optichain.png";
 import kanbanImg from "../assets/kanban.png";
 import studentPortalImg from "../assets/StudentPortal.png";
-import healthAppImg from "../assets/HealthApp.png";
+import healthAppImg from "../assets/balans-mockup-3-skarmar.png";
 import leksaksbibliotekImg from "../assets/leksaksbibliotek.png";
 import vandrandekassarImg from "../assets/vandrandekassar.png";
 import alienPlanetImg from "../assets/aliensframe2.png";
