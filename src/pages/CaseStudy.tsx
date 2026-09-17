@@ -537,7 +537,7 @@ function CaseStudyContent({
           <FadeIn delay={0.15} className="mt-14">
             <div className="p-5 sm:p-6 rounded-t-[28px] sm:rounded-t-[34px]" style={{ background: tint }}>
               <div className="relative w-full h-[260px] sm:h-[380px] lg:h-[520px] rounded-3xl overflow-hidden">
-                <ImageSlot image={cs.heroImage} />
+                <ImageSlot image={cs.heroImage} fit="contain" />
               </div>
             </div>
           </FadeIn>

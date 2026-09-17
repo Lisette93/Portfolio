@@ -4,16 +4,18 @@ import type { CaseStudyImage } from "../data/projects";
 export default function ImageSlot({
   image,
   className = "",
+  fit = "cover",
 }: {
   image: CaseStudyImage;
   className?: string;
+  fit?: "cover" | "contain";
 }) {
   if (image.src) {
     return (
       <img
         src={image.src}
         alt={image.alt}
-        className={`w-full h-full object-cover ${className}`}
+        className={`w-full h-full ${fit === "contain" ? "object-contain" : "object-cover"} ${className}`}
       />
     );
   }
