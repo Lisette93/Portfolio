@@ -9,7 +9,7 @@ import {
 } from "../components/HeroDecorations";
 import FeaturedCarousel from "../components/FeaturedCarousel";
 import { motion } from "framer-motion";
-import healthAppImg from "../assets/HealthApp.png";
+import healthAppImg from "../assets/balans-mockup-2-skarmar.png";
 
 const whatIDo = [
   {
