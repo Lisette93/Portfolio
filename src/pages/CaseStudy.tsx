@@ -731,24 +731,31 @@ function CaseStudyContent({
                     <p className="font-display italic text-lg leading-relaxed mt-5" style={{ color: "#5A4C43", textWrap: "pretty" }}>{ph.takeaway}</p>
                   </div>
 
-                  <div className="mt-8">
-                    {ph.panels ? (
-                      <div className="grid gap-6 min-w-0">
-                        {ph.panels.map((panel, i) => (
-                          <ResearchPanel key={i} panel={panel} accent={accent} tintSoft={tintSoft} accentSoft={accentSoft} accentInk={accentInk} />
-                        ))}
-                      </div>
-                    ) : ph.images ? (
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                        {ph.images.map((img, i) => (
-                          <div key={i} className="relative h-[220px] sm:h-[260px] rounded-[18px] overflow-hidden">
-                            <ClickableImage image={img} onOpen={setLightboxImage} />
-                          </div>
-                        ))}
-                      </div>
-                    ) : null}
-                    <div className="font-body text-[13.5px] italic mt-3.5" style={{ color: MUTED }}>{ph.caption}</div>
-                  </div>
+                  {(ph.panels || ph.images) && (
+                    <div className="mt-8">
+                      {ph.panels ? (
+                        <div className="grid gap-6 min-w-0">
+                          {ph.panels.map((panel, i) => (
+                            <ResearchPanel key={i} panel={panel} accent={accent} tintSoft={tintSoft} accentSoft={accentSoft} accentInk={accentInk} />
+                          ))}
+                        </div>
+                      ) : (
+                        <div className="grid grid-cols-1 sm:grid-cols-[repeat(auto-fit,minmax(220px,1fr))] gap-5">
+                          {ph.images!.map((img, i) => (
+                            <div
+                              key={i}
+                              className={`relative h-[220px] sm:h-[260px] rounded-[18px] overflow-hidden ${ph.images!.length === 1 ? "sm:max-w-[300px] sm:mx-auto" : ""}`}
+                            >
+                              <ClickableImage image={img} onOpen={setLightboxImage} />
+                            </div>
+                          ))}
+                        </div>
+                      )}
+                      {ph.caption && (
+                        <div className="font-body text-[13.5px] italic mt-3.5" style={{ color: MUTED }}>{ph.caption}</div>
+                      )}
+                    </div>
+                  )}
                 </div>
               </FadeIn>
             ))}
@@ -864,7 +871,7 @@ function CaseStudyContent({
         </div>
 
         <div className="mt-11 rounded-[28px] sm:rounded-[34px] p-5 sm:p-8" style={{ background: tint }}>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
+          <div className="grid grid-cols-1 sm:grid-cols-[repeat(auto-fit,minmax(240px,340px))] justify-center gap-5">
             {cs.delivery.screens.map((s, i) => (
               <div key={i}>
                 <div className="relative h-[280px] sm:h-[420px] lg:h-[520px] rounded-[20px] overflow-hidden">

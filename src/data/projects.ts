@@ -10,6 +10,8 @@ import alienPlanetImg from "../assets/aliensframe2.png";
 export interface CaseStudyImage {
   src?: string;
   alt: string;
+  /** "contain" for text/diagram artifacts that shouldn't be cropped; default "cover" for UI screenshots */
+  fit?: "cover" | "contain";
 }
 
 export interface CaseStudyPanelHeader {
@@ -92,9 +94,10 @@ export interface CaseStudyPhase {
   found: string[];
   takeaway: string;
   /** exactly one of images / panels — panels renders research artefacts as real content instead of screenshots */
-  images?: [CaseStudyImage, CaseStudyImage];
+  images?: CaseStudyImage[];
   panels?: [CaseStudyPanel, CaseStudyPanel];
-  caption: string;
+  /** describes the images row below — omit when a phase has no images */
+  caption?: string;
 }
 
 export interface CaseStudyChange {
@@ -777,12 +780,6 @@ export const projects: Project[] = [
           ],
           takeaway:
             "People didn't quit because the content was bad — they quit because every session assumed they had 45 minutes and a clear head.",
-          images: [
-            { alt: "Interview notes and FigJam research board" },
-            { alt: "Competitor teardown of onboarding screens" },
-          ],
-          caption:
-            "Research board and competitor teardown — the raw material everything below came from.",
         },
         {
           n: "02",
@@ -808,10 +805,13 @@ export const projects: Project[] = [
           takeaway:
             "The persona became a filter: every later decision had to answer one question — does this lower the effort of starting?",
           images: [
-            { alt: "Empathy map — says, thinks, does, feels" },
-            { alt: "Primary persona summary card" },
+            { src: "/images/health-app/behov.png", alt: "Needs analysis — Behov", fit: "contain" },
+            { src: "/images/health-app/onskningar.png", alt: "Needs analysis — Önskningar", fit: "contain" },
+            { src: "/images/health-app/persona-sofia.png", alt: "User persona — Sofia, 38", fit: "contain" },
+            { src: "/images/health-app/problemformulering.png", alt: "Problem statement", fit: "contain" },
+            { src: "/images/health-app/design-goals.png", alt: "Design goals", fit: "contain" },
           ],
-          caption: "The empathy map and the persona it produced.",
+          caption: "The needs analysis and persona, plus the problem statement and design goals they led to.",
         },
         {
           n: "03",
@@ -832,10 +832,9 @@ export const projects: Project[] = [
           takeaway:
             "I chose a mood-first entry over a category browse, because the interviews showed people open the app already undecided.",
           images: [
-            { alt: "Paper sketches of home-screen concepts" },
-            { alt: "User flow / site map from launch to session" },
+            { src: "/images/health-app/user-journey.png", alt: "User journey — trigger to result", fit: "contain" },
           ],
-          caption: "Sketches and the flow they narrowed down to.",
+          caption: "The user journey the ideation converged on.",
         },
         {
           n: "04",
@@ -859,10 +858,10 @@ export const projects: Project[] = [
           ],
           takeaway: "Testing changed the copy far more than the layout — the structure held, the words didn't.",
           images: [
-            { alt: "Prototype flow laid out in Figma" },
-            { alt: "Usability test notes and issue prioritisation" },
+            { src: "/images/health-app/reflection-process.png", alt: "Reflection on process and method", fit: "contain" },
+            { src: "/images/health-app/reflection-design-decision.png", alt: "Reflection on a key design decision", fit: "contain" },
           ],
-          caption: "The tested prototype and the notes that changed it.",
+          caption: "Written mid-process — on method, and on the decision to leave gamification out.",
         },
       ],
       compare: {
@@ -928,9 +927,8 @@ export const projects: Project[] = [
         prototypeHref:
           "https://www.figma.com/proto/aOfhdCWcCwQ6GXwmK1gE7k/Untitled?node-id=1-2&viewport=628%2C82%2C0.94&t=tDE5v0ztQ2VRHeg3-1&scaling=scale-down&content-scaling=fixed&page-id=0%3A1",
         screens: [
-          { alt: "Hi-fi mood-first home screen", caption: "Home — pick how you feel" },
-          { alt: "Hi-fi session list screen", caption: "Sessions — matched to the mood" },
-          { alt: "Hi-fi session detail and progress screen", caption: "Session — one clear action" },
+          { src: "/images/health-app/home-screen.png", alt: "Hi-fi mood-first home screen", caption: "Home — pick how you feel" },
+          { src: "/images/health-app/session-list.png", alt: "Hi-fi session list screen", caption: "Sessions — matched to the mood" },
         ],
         deliverables: [
           {
