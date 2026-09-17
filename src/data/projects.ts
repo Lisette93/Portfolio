@@ -707,7 +707,7 @@ export const projects: Project[] = [
       eyebrow: "UX case study",
       tagline:
         "A one-week solo project: designing a wellness app for people who quit every wellness app — from four interviews to a tested Figma prototype.",
-      heroImage: { alt: "Health App — hi-fi screens from the final Figma prototype" },
+      heroImage: { src: healthAppImg, alt: "Health App — hi-fi screens from the final Figma prototype" },
       tintSoft: "#F4E9E1",
       accentSoft: "#E5CDC1",
       accentInk: "#96634E",
@@ -839,35 +839,6 @@ export const projects: Project[] = [
         },
         {
           n: "04",
-          title: "Wireframing & visual design",
-          role: "Designer",
-          intro:
-            "Making the structure real on screen, and choosing a tone that doesn't sound like a personal trainer.",
-          before: [
-            "The flow worked on paper but the hierarchy was untested on screen.",
-            "No visual direction — the app risked looking like every other fitness app.",
-          ],
-          did: [
-            "Lo-fi wireframes for [6] key screens in Figma.",
-            "Set a small type and colour scale before touching layout.",
-            "Moved to hi-fi only once the wireframes stopped changing.",
-          ],
-          found: [
-            "Warm, quiet palette",
-            "Large-photo session cards",
-            "Serif headings",
-            "One primary action per screen",
-          ],
-          takeaway:
-            "The visual direction was a decision, not decoration — warm and quiet, to counter the shouty tone the interviewees said put them off.",
-          images: [
-            { alt: "Lo-fi wireframes of the core screens" },
-            { alt: "Type scale, colour palette and component set" },
-          ],
-          caption: "From wireframe to visual direction.",
-        },
-        {
-          n: "05",
           title: "Prototype & user testing",
           role: "Test lead",
           intro: "The last phase, and the only one that could tell me whether any of the above was right.",
@@ -1003,15 +974,6 @@ export const projects: Project[] = [
           points: [
             "A persona is only useful if it can say no to a feature. Mine did, twice.",
             "Working solo, writing decisions down was what kept me honest — there was nobody to argue with.",
-          ],
-        },
-        {
-          n: "04",
-          title: "Next steps",
-          points: [
-            "Validate whether calm progress actually brings people back after week one — the whole premise rests on it.",
-            "Test the mood entry with people who already exercise regularly, to see if it generalises.",
-            "Design the empty and error states; the prototype only covers the happy path.",
           ],
         },
       ],
