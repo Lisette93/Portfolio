@@ -128,6 +128,7 @@ export default function Home() {
                 src={husplanenMockupImg}
                 alt="Husplanen project preview"
                 className="w-full h-full object-cover"
+                style={{ objectPosition: "25% 42%" }}
               />
             </motion.div>
           </FadeIn>
