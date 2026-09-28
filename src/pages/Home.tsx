@@ -9,7 +9,7 @@ import {
 } from "../components/HeroDecorations";
 import FeaturedCarousel from "../components/FeaturedCarousel";
 import { motion } from "framer-motion";
-import healthAppImg from "../assets/balans-mockup-2-skarmar.png";
+import heroMockupImg from "../assets/00-hero-mockup-2skarmar-svart.png";
 
 const whatIDo = [
   {
@@ -120,8 +120,8 @@ export default function Home() {
           {/* Right column — floating image */}
           <FadeIn delay={0.2} className="flex justify-center lg:justify-end">
             <motion.img
-              src={healthAppImg}
-              alt="Health app project preview"
+              src={heroMockupImg}
+              alt="Husplanen project preview"
               animate={{ y: [0, -14, 0] }}
               transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
               className="w-64 md:w-72 lg:w-80 xl:w-96 2xl:w-120 shrink-0 drop-shadow-2xl rounded-3xl"
