@@ -30,14 +30,44 @@ const whatIDo = [
   {
     icon: (
       <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-        <rect x="3" y="5" width="26" height="22" rx="3" stroke="#B67963" strokeWidth="1.5" />
-        <path d="M3 11h26" stroke="#B67963" strokeWidth="1.5" strokeLinecap="round" />
+        <rect
+          x="3"
+          y="5"
+          width="26"
+          height="22"
+          rx="3"
+          stroke="#B67963"
+          strokeWidth="1.5"
+        />
+        <path
+          d="M3 11h26"
+          stroke="#B67963"
+          strokeWidth="1.5"
+          strokeLinecap="round"
+        />
         <circle cx="8" cy="8" r="1" fill="#B67963" opacity="0.5" />
         <circle cx="12" cy="8" r="1" fill="#B67963" opacity="0.5" />
         <circle cx="16" cy="8" r="1" fill="#B67963" opacity="0.5" />
-        <path d="M10 17l-3 2 3 2" stroke="#B67963" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
-        <path d="M22 17l3 2-3 2" stroke="#B67963" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
-        <path d="M18 15l-4 8" stroke="#B67963" strokeWidth="1.3" strokeLinecap="round" />
+        <path
+          d="M10 17l-3 2 3 2"
+          stroke="#B67963"
+          strokeWidth="1.4"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+        <path
+          d="M22 17l3 2-3 2"
+          stroke="#B67963"
+          strokeWidth="1.4"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+        <path
+          d="M18 15l-4 8"
+          stroke="#B67963"
+          strokeWidth="1.3"
+          strokeLinecap="round"
+        />
       </svg>
     ),
     title: "Frontend Development",
@@ -55,7 +85,7 @@ const whatIDo = [
       </svg>
     ),
     title: "AI-Assisted Workflows",
-    desc: "Using Claude Code, v0, and other AI tools to work smarter and raise the quality bar.",
+    desc: "Using Claude Code and other AI tools to work smarter and raise the quality bar.",
   },
 ];
 
