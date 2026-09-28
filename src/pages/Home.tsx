@@ -64,7 +64,7 @@ export default function Home() {
     <PageTransition>
       {/* ── HERO ── */}
       <section
-        className="relative min-h-screen flex items-center px-6 pt-28 pb-12 overflow-hidden"
+        className="relative flex items-center px-6 pt-36 pb-24 overflow-hidden"
         style={{
           background:
             "radial-gradient(ellipse at 70% 30%, #f5e6d8 0%, #FAF7F2 55%)",
