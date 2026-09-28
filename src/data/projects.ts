@@ -1,7 +1,6 @@
 import husplanenMockupImg from "../assets/husplanen-mockup.png";
 import optichaingImg from "../assets/optichain.png";
 import kanbanImg from "../assets/kanban.png";
-import studentPortalImg from "../assets/StudentPortal.png";
 import healthAppImg from "../assets/balans-mockup-3-skarmar.png";
 import leksaksbibliotekImg from "../assets/leksaksbibliotek.png";
 import vandrandekassarImg from "../assets/vandrandekassar.png";
@@ -965,105 +964,6 @@ export const projects: Project[] = [
       { label: "View prototype", url: "https://www.figma.com/proto/IjWeaK8KZZXxvIS2Qh8A82/Enh%C3%B6rningstanternas-snygg-figma?node-id=6-53&scaling=scale-down&content-scaling=fixed&t=PkdXdtJGKdC2eiJ-1&page-id=0%3A1" },
       { label: "View process", url: "https://www.figma.com/board/q5SayjTnDSilmJgYNY9813/Enh%C3%B6rningstanterna?node-id=0-1&t=XFQxekg8yjtSyhUP-1" },
     ],
-    caseStudy: {
-      eyebrow: "UX case study",
-      tagline:
-        "[Placeholder tagline] — a group project designing a toy library service, from user research through to an interactive Figma prototype.",
-      heroImage: { alt: "Toy Library — hi-fi screens from the final Figma prototype" },
-      tintSoft: "#F5EDE1",
-      accentSoft: "#E6D8C0",
-      accentInk: "#967A47",
-      summary: [
-        { label: "The problem", body: "[Placeholder — the specific problem the team identified, confirmed against the research]" },
-        { label: "My decision", body: "[Placeholder — the design decision you personally pushed for, and why]" },
-        { label: "The outcome", body: "[Placeholder — what testing or delivery showed]" },
-      ],
-      overview: {
-        heading: "[Placeholder overview heading]",
-        body: [
-          "[Placeholder — one or two sentences on the problem space and who the team designed for.]",
-          "[Placeholder — how the team worked and what the prototype covers.]",
-        ],
-        contribution:
-          "[Placeholder — name your specific contribution on this group project: which research, which decisions, which screens were yours.]",
-      },
-      facts: [
-        { label: "My role", value: "[Placeholder — e.g. UX designer / researcher on a team of N]" },
-        { label: "Team", value: "Group project" },
-        { label: "Timeline", value: "[Placeholder]" },
-        { label: "Context", value: "[Course project]" },
-        { label: "Platform", value: "[Placeholder] — Figma prototype" },
-      ],
-      tools: ["Figma", "FigJam", "User interviews", "Empathy mapping", "Personas", "Journey mapping", "Wireframing", "Prototyping"],
-      phases: [
-        {
-          n: "01",
-          title: "Research & discovery",
-          role: "[Placeholder — your role in this phase]",
-          intro: "[Placeholder — what the team needed to learn before designing anything.]",
-          before: ["[Placeholder — where things stood before research]"],
-          did: ["[Placeholder — what the team actually did]"],
-          found: ["[Placeholder finding]", "[Placeholder finding]"],
-          takeaway: "[Placeholder — one-sentence takeaway from this phase]",
-          images: [
-            { alt: "[Placeholder — research board or interview notes]" },
-            { alt: "[Placeholder — competitor teardown]" },
-          ],
-          caption: "[Placeholder caption]",
-        },
-        {
-          n: "02",
-          title: "Personas & journey mapping",
-          role: "[Placeholder — your role in this phase]",
-          intro: "[Placeholder — how research turned into a shared user picture.]",
-          before: ["[Placeholder]"],
-          did: ["[Placeholder — empathy map and persona work]", "[Placeholder — journey mapping]"],
-          found: ["[Placeholder finding]", "[Placeholder finding]"],
-          takeaway: "[Placeholder — one-sentence takeaway from this phase]",
-          images: [
-            { alt: "[Placeholder — empathy map]" },
-            { alt: "[Placeholder — persona or journey map]" },
-          ],
-          caption: "[Placeholder caption]",
-        },
-        {
-          n: "03",
-          title: "Wireframes & prototype",
-          role: "[Placeholder — your role in this phase]",
-          intro: "[Placeholder — how the team went from journey map to screens.]",
-          before: ["[Placeholder]"],
-          did: ["[Placeholder — wireframing]", "[Placeholder — building the interactive prototype]"],
-          found: ["[Placeholder finding]"],
-          takeaway: "[Placeholder — one-sentence takeaway from this phase]",
-          images: [
-            { alt: "[Placeholder — wireframes]" },
-            { alt: "[Placeholder — hi-fi prototype screens]" },
-          ],
-          caption: "[Placeholder caption]",
-        },
-      ],
-      delivery: {
-        intro: "[Placeholder — what the final prototype covers end to end.]",
-        prototypeHref:
-          "https://www.figma.com/proto/IjWeaK8KZZXxvIS2Qh8A82/Enh%C3%B6rningstanternas-snygg-figma?node-id=6-53&scaling=scale-down&content-scaling=fixed&t=PkdXdtJGKdC2eiJ-1&page-id=0%3A1",
-        screens: [
-          { alt: "[Placeholder hi-fi screen]", caption: "[Placeholder caption]" },
-          { alt: "[Placeholder hi-fi screen]", caption: "[Placeholder caption]" },
-          { alt: "[Placeholder hi-fi screen]", caption: "[Placeholder caption]" },
-        ],
-        deliverables: [
-          { label: "Prototype", title: "Clickable in Figma", body: "[Placeholder — scope of the clickable flow]" },
-          { label: "Foundations", title: "Type, colour, components", body: "[Placeholder — the design system basics used]" },
-          { label: "Handoff", title: "Documented decisions", body: "[Placeholder — what was documented for the team/course]" },
-        ],
-      },
-      reflections: [
-        { n: "01", title: "Results", points: ["[Placeholder — what shipped and how it performed]"] },
-        { n: "02", title: "What I'd do differently", points: ["[Placeholder]"] },
-        { n: "03", title: "What I learned", points: ["[Placeholder]"] },
-        { n: "04", title: "Next steps", points: ["[Placeholder]"] },
-      ],
-    },
   },
   {
     id: "wandering-bags",
@@ -1094,108 +994,6 @@ export const projects: Project[] = [
       { label: "View prototype", url: "https://www.figma.com/proto/4v4lv65dPbsVzXCG7tLwdw/SLUTPROJEKT-UX-EH-Vandrande-kasse?node-id=274-59&p=f&viewport=1283%2C92%2C0.05&t=x5QYZ6A7kJKgASg2-1&scaling=min-zoom&content-scaling=fixed&starting-point-node-id=274%3A59&show-proto-sidebar=1&page-id=270%3A114" },
       { label: "View process", url: "https://www.figma.com/board/kFk0DvIAUoYUJZQyRIx6tW/FigJam-vandrande-kasse-UX-EH?node-id=0-1&t=wFc7L0nAhoThB8RX-1" },
     ],
-    caseStudy: {
-      eyebrow: "UX case study",
-      tagline:
-        "A group project designing a circular clothing-sharing concept — garments travel between neighbours instead of into landfill.",
-      heroImage: { alt: "Wandering Bags — hi-fi screens from the final Figma prototype" },
-      tintSoft: "#F0EBE3",
-      accentSoft: "#D8D4C6",
-      accentInk: "#76755E",
-      summary: [
-        { label: "The problem", body: "[Placeholder — the specific problem the team identified about clothes-sharing behaviour, confirmed against the research]" },
-        {
-          label: "My decision",
-          body: "I owned the empathy map, problem statement and design goals, then carried them into prototyping — [placeholder: name the specific design call this led to].",
-        },
-        { label: "The outcome", body: "[Placeholder — what testing or delivery showed]" },
-      ],
-      overview: {
-        heading: "A circular alternative to fast fashion, built around trust between neighbours",
-        body: [
-          "Wandering Bags is a concept for garments that travel between people in the same local community instead of being bought new and thrown away. [Placeholder — one more sentence on the specific behaviour or barrier the team designed around.]",
-          "As a team we went through research, empathy mapping, personas, journey mapping, wireframes and an interactive Figma prototype. [Placeholder — how the team divided the work.]",
-        ],
-        contribution:
-          "I was responsible for the empathy map, the problem statement, the design goals and the prototyping — the thread connecting what we learned from people to what we actually built.",
-      },
-      facts: [
-        { label: "My role", value: "UX designer — empathy map, problem statement, design goals, prototyping" },
-        { label: "Team", value: "Group project" },
-        { label: "Timeline", value: "[Placeholder]" },
-        { label: "Context", value: "[Course project]" },
-        { label: "Platform", value: "[Placeholder] — Figma prototype" },
-      ],
-      tools: ["Figma", "FigJam", "User interviews", "Empathy mapping", "Journey mapping", "Wireframing", "Prototyping"],
-      phases: [
-        {
-          n: "01",
-          title: "Research & empathy mapping",
-          role: "Empathy mapper",
-          intro: "[Placeholder — what the team wanted to understand about how people currently pass on clothes.]",
-          before: ["[Placeholder — where things stood before research]"],
-          did: ["Built the empathy map the team's personas were based on.", "[Placeholder — other research activities]"],
-          found: ["[Placeholder finding]", "[Placeholder finding]"],
-          takeaway: "[Placeholder — one-sentence takeaway from this phase]",
-          images: [
-            { alt: "[Placeholder — empathy map]" },
-            { alt: "[Placeholder — interview or research notes]" },
-          ],
-          caption: "[Placeholder caption]",
-        },
-        {
-          n: "02",
-          title: "Problem framing & design goals",
-          role: "Problem framer",
-          intro: "[Placeholder — how the team narrowed research into a problem worth solving.]",
-          before: ["[Placeholder]"],
-          did: ["Wrote the problem statement and design goals the rest of the team designed against.", "[Placeholder — journey mapping]"],
-          found: ["[Placeholder finding]"],
-          takeaway: "[Placeholder — one-sentence takeaway from this phase]",
-          images: [
-            { alt: "[Placeholder — problem statement / design goals artefact]" },
-            { alt: "[Placeholder — journey map]" },
-          ],
-          caption: "[Placeholder caption]",
-        },
-        {
-          n: "03",
-          title: "Wireframes & prototyping",
-          role: "Prototyper",
-          intro: "[Placeholder — how the design goals became a clickable flow.]",
-          before: ["[Placeholder]"],
-          did: ["Built the wireframes and the interactive Figma prototype from the agreed design goals."],
-          found: ["[Placeholder finding]"],
-          takeaway: "[Placeholder — one-sentence takeaway from this phase]",
-          images: [
-            { alt: "[Placeholder — wireframes]" },
-            { alt: "[Placeholder — hi-fi prototype screens]" },
-          ],
-          caption: "[Placeholder caption]",
-        },
-      ],
-      delivery: {
-        intro: "[Placeholder — what the final prototype covers end to end.]",
-        prototypeHref:
-          "https://www.figma.com/proto/4v4lv65dPbsVzXCG7tLwdw/SLUTPROJEKT-UX-EH-Vandrande-kasse?node-id=274-59&p=f&viewport=1283%2C92%2C0.05&t=x5QYZ6A7kJKgASg2-1&scaling=min-zoom&content-scaling=fixed&starting-point-node-id=274%3A59&show-proto-sidebar=1&page-id=270%3A114",
-        screens: [
-          { alt: "[Placeholder hi-fi screen]", caption: "[Placeholder caption]" },
-          { alt: "[Placeholder hi-fi screen]", caption: "[Placeholder caption]" },
-          { alt: "[Placeholder hi-fi screen]", caption: "[Placeholder caption]" },
-        ],
-        deliverables: [
-          { label: "Prototype", title: "Clickable in Figma", body: "[Placeholder — scope of the clickable flow]" },
-          { label: "Foundations", title: "Type, colour, components", body: "[Placeholder — the design system basics used]" },
-          { label: "Handoff", title: "Documented decisions", body: "The problem statement and design goals I wrote, carried through to the final prototype." },
-        ],
-      },
-      reflections: [
-        { n: "01", title: "Results", points: ["[Placeholder — what shipped and how it performed]"] },
-        { n: "02", title: "What I'd do differently", points: ["[Placeholder]"] },
-        { n: "03", title: "What I learned", points: ["[Placeholder]"] },
-        { n: "04", title: "Next steps", points: ["[Placeholder]"] },
-      ],
-    },
   },
   {
     id: "optichain",
@@ -1262,27 +1060,6 @@ export const projects: Project[] = [
     links: [
       { label: "Live demo", url: "https://alien-planet.onrender.com/" },
       { label: "GitHub", url: "https://github.com/MattiasKopparberg/Alien-planet" },
-    ],
-  },
-  {
-    id: "student-portal",
-    title: "Student Portal",
-    category: "FRONTEND PROJECT",
-    year: "2024",
-    shortDesc:
-      "Interactive student portal with filtering, search, and API integration built in React and JavaScript.",
-    longDesc:
-      "An interactive portal with real filtering, search functionality, and API integration. Focus on clean component structure and user-friendly interaction patterns. Fully responsive across devices.",
-    tags: ["JavaScript", "React", "REST API", "Filtering", "Search"],
-    color: "#9E8A7A",
-    accentColor: "#ede8e4",
-    rotation: "1.5deg",
-    featured: false,
-    size: "small",
-    image: studentPortalImg,
-    links: [
-      { label: "GitHub", url: "https://github.com/Lisette93/StudentPortal" },
-      { label: "Live demo", url: "https://lisette93.github.io/StudentPortal/" },
     ],
   },
 ];

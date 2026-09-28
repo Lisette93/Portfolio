@@ -84,7 +84,7 @@ function ProjectCard({ project, index, num }: { project: Project; index: number;
           <div className="h-px my-6" style={{ background: 'rgba(53,48,44,0.08)' }} />
 
           <div className="flex flex-wrap gap-2.5">
-            {isUx && (
+            {isUx && project.caseStudy && (
               <Link
                 to={`/projects/${project.id}`}
                 className="font-body text-sm font-medium px-5 py-3 rounded-full text-white whitespace-nowrap transition-colors"
