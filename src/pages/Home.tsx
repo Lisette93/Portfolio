@@ -124,7 +124,7 @@ export default function Home() {
               alt="Health app project preview"
               animate={{ y: [0, -14, 0] }}
               transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-              className="w-64 md:w-72 lg:w-80 xl:w-96 drop-shadow-2xl rounded-3xl"
+              className="w-64 md:w-72 lg:w-80 xl:w-96 2xl:w-120 shrink-0 drop-shadow-2xl rounded-3xl"
             />
           </FadeIn>
         </div>
