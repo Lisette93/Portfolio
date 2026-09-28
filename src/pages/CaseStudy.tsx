@@ -431,7 +431,19 @@ function CaseStudyContent({
   const [progress, setProgress] = useState(0);
   const [active, setActive] = useState(0);
   const [lightboxImage, setLightboxImage] = useState<CaseStudyImage | null>(null);
+  const [showFloatingSkip, setShowFloatingSkip] = useState(false);
   const rafRef = useRef<number | null>(null);
+  const heroCtaRef = useRef<HTMLAnchorElement | null>(null);
+
+  useEffect(() => {
+    const el = heroCtaRef.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(([entry]) => setShowFloatingSkip(!entry.isIntersecting), {
+      rootMargin: "-96px 0px 0px 0px",
+    });
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
 
   useEffect(() => {
     const onScroll = () => {
@@ -484,6 +496,21 @@ function CaseStudyContent({
         />
       </div>
 
+      {/* floating "skip to outcome" — mirrors the hero CTA once it scrolls out of view */}
+      <a
+        href="#delivery"
+        className="fixed bottom-6 right-6 z-40 font-body text-sm font-medium px-6 py-3.5 rounded-full text-white shadow-lg transition-all duration-300"
+        style={{
+          background: accent,
+          boxShadow: "0 10px 30px -10px rgba(53,48,44,0.45)",
+          opacity: showFloatingSkip ? 1 : 0,
+          transform: showFloatingSkip ? "translateY(0)" : "translateY(12px)",
+          pointerEvents: showFloatingSkip ? "auto" : "none",
+        }}
+      >
+        Skip to the outcome
+      </a>
+
       {/* ░░ HERO ░░ */}
       <section
         className="relative overflow-hidden pt-28 sm:pt-32"
@@ -526,6 +553,7 @@ function CaseStudyContent({
               </a>
             )}
             <a
+              ref={heroCtaRef}
               href="#delivery"
               className="font-body text-sm px-7 py-3.5 rounded-full border transition-colors"
               style={{ color: accent, borderColor: tint }}
@@ -651,11 +679,13 @@ function CaseStudyContent({
               })}
               <div className="h-px my-3" style={{ background: HAIRLINE_STRONG }} />
               {[
-                ["Before / after", "#compare"],
-                ["Alternatives", "#alternatives"],
+                cs.compare && ["Before / after", "#compare"],
+                cs.alternatives && ["Alternatives", "#alternatives"],
                 ["Delivery", "#delivery"],
                 ["Reflection", "#reflection"],
-              ].map(([label, href]) => (
+              ]
+                .filter((x): x is [string, string] => Boolean(x))
+                .map(([label, href]) => (
                 <a key={href} href={href} className="py-1.5 pl-6 text-sm font-light" style={{ color: MUTED }}>
                   {label}
                 </a>
@@ -777,18 +807,22 @@ function CaseStudyContent({
                 <span className="font-body text-xs font-medium tracking-[0.14em] uppercase px-3.5 py-1.5 rounded-full" style={{ color: "#8F8781", background: "#EFE9E4" }}>Before</span>
                 <span className="font-body text-sm" style={{ color: MUTED }}>{cs.compare.beforeLabel}</span>
               </div>
-              <div className="relative h-[280px] sm:h-[380px] rounded-[26px] p-4" style={{ background: "#F3EFEB" }}>
-                <ClickableImage image={cs.compare.before} className="rounded-2xl" onOpen={setLightboxImage} />
-              </div>
+              {cs.compare.before.src && (
+                <div className="relative h-[280px] sm:h-[380px] rounded-[26px] p-4" style={{ background: "#F3EFEB" }}>
+                  <ClickableImage image={cs.compare.before} className="rounded-2xl" onOpen={setLightboxImage} />
+                </div>
+              )}
             </div>
             <div>
               <div className="flex items-center gap-3 mb-4 flex-wrap">
                 <span className="font-body text-xs font-medium tracking-[0.14em] uppercase px-3.5 py-1.5 rounded-full text-white" style={{ background: accent }}>After</span>
                 <span className="font-body text-sm" style={{ color: MUTED }}>{cs.compare.afterLabel}</span>
               </div>
-              <div className="relative h-[280px] sm:h-[380px] rounded-[26px] p-4" style={{ background: tint }}>
-                <ClickableImage image={cs.compare.after} className="rounded-2xl" onOpen={setLightboxImage} />
-              </div>
+              {cs.compare.after.src && (
+                <div className="relative h-[280px] sm:h-[380px] rounded-[26px] p-4" style={{ background: tint }}>
+                  <ClickableImage image={cs.compare.after} className="rounded-2xl" onOpen={setLightboxImage} />
+                </div>
+              )}
             </div>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 mt-7">

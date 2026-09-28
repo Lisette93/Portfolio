@@ -696,16 +696,7 @@ export const projects: Project[] = [
     featured: true,
     size: "medium",
     image: healthAppImg,
-    links: [
-      {
-        label: "View prototype",
-        url: "https://www.figma.com/proto/aOfhdCWcCwQ6GXwmK1gE7k/Untitled?node-id=1-2&viewport=628%2C82%2C0.94&t=tDE5v0ztQ2VRHeg3-1&scaling=scale-down&content-scaling=fixed&page-id=0%3A1",
-      },
-      {
-        label: "View process",
-        url: "https://www.figma.com/board/1ApnxeZ99IipRoxmbckh5I/HealthApp?node-id=0-1&t=Xj4j2HziYOiH5cGL-1",
-      },
-    ],
+    links: [],
     caseStudy: {
       eyebrow: "UX case study",
       tagline:
@@ -889,46 +880,14 @@ export const projects: Project[] = [
           },
         ],
       },
-      alternatives: {
-        intro:
-          "The entry point was the real decision on this project — how someone chooses what to do in the first five seconds. I built out three and compared them against the same persona.",
-        decision:
-          "I chose mood-first over browse because the persona's blocker was decision-making, not content — accepting that it scales worse as the library grows, which is why browse stayed as a second route in.",
-        options: [
-          {
-            label: "Direction A",
-            badge: "Chosen",
-            title: "Mood first",
-            body: "The home screen asks how you feel, then offers two or three sessions that match.",
-            why: "Won because interviewees described opening the app undecided and low on energy. Choosing a feeling is easier than choosing a workout.",
-            img: { alt: "Direction A — mood-first home screen" },
-          },
-          {
-            label: "Direction B",
-            badge: "Considered",
-            title: "Browse by category",
-            body: "A conventional library — yoga, strength, breathing — with filters.",
-            why: "Familiar and scalable, but it puts the decision on someone who told me they can't make it. Kept as a secondary tab instead.",
-            img: { alt: "Direction B — browse-by-category home screen" },
-          },
-          {
-            label: "Direction C",
-            badge: "Dropped",
-            title: "Guided weekly plan",
-            body: "A fixed programme that tells you what to do each day.",
-            why: "Dropped early: it recreates exactly the pressure and guilt that made people stop using their last app.",
-            img: { alt: "Direction C — guided weekly plan concept" },
-          },
-        ],
-      },
       delivery: {
         intro:
           "An interactive Figma prototype covering the full flow from launch to a finished session, plus the small set of foundations it was built on.",
-        prototypeHref:
-          "https://www.figma.com/proto/aOfhdCWcCwQ6GXwmK1gE7k/Untitled?node-id=1-2&viewport=628%2C82%2C0.94&t=tDE5v0ztQ2VRHeg3-1&scaling=scale-down&content-scaling=fixed&page-id=0%3A1",
         screens: [
-          { src: "/images/health-app/home-screen.png", alt: "Hi-fi mood-first home screen", caption: "Home — pick how you feel" },
-          { src: "/images/health-app/session-list.png", alt: "Hi-fi session list screen", caption: "Sessions — matched to the mood" },
+          { src: "/images/health-app/01-start.jpg", alt: "Hi-fi mood-first home screen", caption: "Home — pick how you feel" },
+          { src: "/images/health-app/02-power.jpg", alt: "Hi-fi Power session list screen", caption: "Sessions — matched to the mood" },
+          { src: "/images/health-app/03-passdetalj.jpg", alt: "Hi-fi session detail screen for Morning flow", caption: "Session detail — what you're in for" },
+          { src: "/images/health-app/04-reset.jpg", alt: "Hi-fi Reset breathing screen", caption: "Reset — a guided breathing session" },
         ],
         deliverables: [
           {
