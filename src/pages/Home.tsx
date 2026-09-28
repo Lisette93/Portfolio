@@ -123,7 +123,7 @@ export default function Home() {
               animate={{ y: [0, -14, 0] }}
               transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
             >
-              <div className="w-72 h-90 sm:w-80 sm:h-100 lg:w-88 lg:h-110 xl:w-100 xl:h-125 drop-shadow-2xl rounded-3xl overflow-hidden">
+              <div className="w-72 h-90 sm:w-80 sm:h-100 lg:w-88 lg:h-110 xl:w-100 xl:h-125 2xl:w-140 2xl:h-175 drop-shadow-2xl rounded-3xl overflow-hidden">
                 <img
                   src={husplanenMockupImg}
                   alt="Husplanen project preview"
