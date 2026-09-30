@@ -549,7 +549,7 @@ function CaseStudyContent({
                 className="font-body text-sm font-medium px-7 py-3.5 rounded-full text-white transition-colors"
                 style={{ background: accent }}
               >
-                View the prototype ↗
+                {project.links[0].label} ↗
               </a>
             )}
             <a

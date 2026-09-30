@@ -695,7 +695,7 @@ export const projects: Project[] = [
     featured: true,
     size: "medium",
     image: healthAppImg,
-    links: [],
+    links: [{ label: "Preview", url: "https://lisette93.github.io/HealthApp/" }],
     caseStudy: {
       eyebrow: "UX case study",
       tagline:

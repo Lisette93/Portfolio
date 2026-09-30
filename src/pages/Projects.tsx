@@ -105,7 +105,7 @@ function ProjectCard({ project, index, num }: { project: Project; index: number;
                     : { background: project.color, borderColor: project.color }
                 }
               >
-                {isUx ? 'View prototype ↗' : primaryLink.label + ' ↗'}
+                {primaryLink.label} ↗
               </a>
             )}
             {secondaryLinks.map((link) => (
