@@ -59,7 +59,7 @@ export default function Footer() {
             </svg>
           </a>
           <a
-            href="mailto:lisettestorm@hotmail.com"
+            href="mailto:lisettebrkostorm@gmail.com"
             aria-label="Email"
             className="w-10 h-10 rounded-full border border-sand/30 flex items-center justify-center text-charcoal-light hover:text-sage hover:border-sage transition-colors"
           >
